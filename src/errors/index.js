@@ -8,4 +8,12 @@ class UnauthenticatedError extends Error {
   }
 }
 
-export default UnauthenticatedError;
+class UnauthorizedError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "UnauthorizedError";
+    this.statusCode = StatusCodes.FORBIDDEN;
+  }
+}
+
+export { UnauthenticatedError, UnauthorizedError };

@@ -1,6 +1,6 @@
 import { StatusCodes } from "http-status-codes";
-import UnauthenticatedError from "../../errors/index.js";
-// import notFound from "../../middlewares/not-found.middleware.js";
+import { UnauthenticatedError } from "../../errors/index.js";
+import * as usersServices from "../../users/service.user.js";
 
 const register = async (req, res) => {
   const user = await usersServices.create(req.body);
@@ -19,14 +19,7 @@ const login = async (req, res) => {
 
   const token = user.createAccessToken();
 
-  res.status(StatusCodes.OK).json({ user: { userId: user.id }, token });
+  res.status(StatusCodes.OK).json({ user: { userId: user._id }, token });
 };
-
-// const dashboard = async (req, res) => {
-//   const { id } = req.params;
-//   const comptes = await compte.findById(id);
-//   if (!comptes) throw new notFound("Compte introuvable");
-//   res.status(StatusCodes.OK).json({ comptes });
-// };
 
 export { register, login };

@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
-const connectDB = () => {
+const connectDB = async () => {
   try {
-    mongoose.connect(process.env.MONGO_URI);
+    await mongoose.connect(process.env.MONGO_URI);
   } catch (error) {
     console.error(error.message);
     process.exit(1);
@@ -11,8 +11,8 @@ const connectDB = () => {
 
 const dbConnection = mongoose.connection;
 
-dbConnection.once("Ouvert", () => console.log("Base de données connectée"));
+dbConnection.once("open", () => console.log("Base de données connectée"));
 
-dbConnection.on("Erreur", (err) => console.log(`Erreur de connexion: ${err}`));
+dbConnection.on("error", (err) => console.log(`Erreur de connexion: ${err}`));
 
 export default connectDB;

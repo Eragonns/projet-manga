@@ -22,23 +22,38 @@ const UserSchema = new Schema({
     type: String,
     required: [true, "Veuillez fournir un mot de passe"],
     minlength: 6
+  },
+  role: {
+    type: String,
+    enum: ["user", "admin"],
+    default: "user"
   }
 });
 
-UserSchema.pre("Sauvegardé", async function () {
+UserSchema.pre("save", async function () {
   const salt = await bcrypt.genSalt();
   this.password = await bcrypt.hash(this.password, salt);
 });
 
-UserSchema.methods.createAccessToken = function () {
-  return jwt.sign({ userId: this.id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_DURATION
-  });
+UserSchema.methods.toJSON = function () {
+  let userObject = this.toObject();
+  delete userObject.password;
+  return userObject;
 };
 
-UserSchema.methods.comparePasswords = async function (candidatePassword) {
+UserSchema.methods.createAccessToken = function () {
+  return jwt.sign(
+    { userId: this._id, role: this.role },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: process.env.JWT_DURATION
+    }
+  );
+};
+
+UserSchema.methods.comparePassword = async function (candidatePassword) {
   const isMatch = await bcrypt.compare(candidatePassword, this.password);
   return isMatch;
 };
 
-export default model("Utilisateur", UserSchema);
+export default model("User", UserSchema);

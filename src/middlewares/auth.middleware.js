@@ -1,18 +1,22 @@
-import UnauthenticatedError from "../errors/index.js";
-import jwt from "jsonwebtoken";
+import { UnauthenticatedError } from "../errors/index.js";
+import { verifyJWT } from "../utils/token.util.js";
 
 const authenticateUser = (req, _res, next) => {
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith("Bearer"))
+    throw new UnauthenticatedError("Pas de token fourni");
+
+  const token = authHeader.split(" ")[1] || null;
   try {
-    const token = req.headers.authorization.split(" ")[1] || null;
-    if (!token) throw new UnauthenticatedError("Pas de token fourni");
-    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-    const userId = decodedToken.id;
-    req.auth = {
-      userId: userId
+    const { userId, role } = verifyJWT(token);
+
+    req.user = {
+      userId,
+      role
     };
     next();
   } catch (error) {
-    throw new UnauthenticatedError("Acces non autorisé");
+    throw new UnauthenticatedError("Authentication invalide");
   }
 };
 
