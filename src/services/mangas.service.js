@@ -1,11 +1,30 @@
 import Manga from "../models/manga.model.js";
 
-const getAll = () => {
-  return Manga.find({});
-};
-
 const create = (data) => {
   return Manga(data).save();
 };
 
-export { create, getAll };
+const getAll = () => {
+  return Manga.find({});
+};
+
+const getUsersMangas = (id) => {
+  return Manga.find({ createdBy: id });
+};
+
+const get = (id) => {
+  return Manga.findById(id);
+};
+
+const remove = (id) => {
+  return Manga.findByIdAndDelete(id);
+};
+
+const update = (id, data) => {
+  return Manga.findByIdAndUpdate(id, data, {
+    new: true,
+    runValidators: true
+  });
+};
+
+export { create, getAll, getUsersMangas, get, remove, update };

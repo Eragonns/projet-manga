@@ -1,5 +1,4 @@
 import { model, Schema } from "mongoose";
-
 import { MANGA_STATUS } from "../utils/constants.util.js";
 
 const MangaSchema = new Schema(
@@ -10,8 +9,8 @@ const MangaSchema = new Schema(
       maxlength: 50
     },
     author: {
-      type: String
-      // required: [true, "Veuillez fournir le nom de l'autheur"]
+      type: String,
+      required: [true, "Veuillez fournir le nom de l'auteur"]
     },
     genre: {
       type: String,
@@ -30,6 +29,11 @@ const MangaSchema = new Schema(
         maxlength: 200
       }
     ],
+    createdBy: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true
+    },
     createdAt: {
       type: Date,
       default: Date.now
@@ -38,4 +42,4 @@ const MangaSchema = new Schema(
   { timestamps: true }
 );
 
-export default model("manga", MangaSchema);
+export default model("Manga", MangaSchema);

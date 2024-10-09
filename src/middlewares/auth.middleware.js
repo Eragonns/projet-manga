@@ -6,7 +6,7 @@ const authenticateUser = (req, _res, next) => {
   if (!authHeader || !authHeader.startsWith("Bearer"))
     throw new UnauthenticatedError("Pas de token fourni");
 
-  const token = authHeader.split(" ")[1] || null;
+  const token = authHeader.split(" ")[1];
   try {
     const { userId, role } = verifyJWT(token);
 

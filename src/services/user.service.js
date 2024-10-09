@@ -1,7 +1,7 @@
-import User from "./model.user.js";
+import User from "../models/user.model.js";
 
 const create = (data) => {
-  return User(data).save();
+  return User.create(data);
 };
 
 const get = (options) => {

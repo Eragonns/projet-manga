@@ -11,7 +11,7 @@ const errorHandler = (err, _req, res, _next) => {
     customError.msg = `La valeur existe déjà pour le champ ${Object.keys(
       err.keyValue
     )}`;
-    customError.statusCode = 400;
+    customError.statusCode = StatusCodes.BAD_REQUEST;
   }
 
   res.status(customError.statusCode).json({ msg: customError.msg });

@@ -5,7 +5,7 @@ import validate from "../../middlewares/validation.middleware.js";
 import {
   LoginUserSchema,
   RegisterUserSchema
-} from "../../users/schema.user.js";
+} from "../../schemas/user.schema.js";
 
 const router = express.Router();
 

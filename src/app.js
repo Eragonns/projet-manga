@@ -1,23 +1,26 @@
+import "dotenv/config";
 import "express-async-errors";
 import express from "express";
-import "dotenv/config";
+import { v2 as cloudinary } from "cloudinary";
+
 import helmet from "helmet";
 import { rateLimit } from "express-rate-limit";
 import mongoSanitize from "express-mongo-sanitize";
 import cors from "cors";
+
 import swaggerUI from "swagger-ui-express";
 import YAML from "yamljs";
-import { StatusCodes } from "http-status-codes";
-import { v2 as cloudinary } from "cloudinary";
 
-import adminRoutes from "./admin/route.admin.js";
-import notFound from "./middlewares/not-found.middleware.js";
-import errorHandler from "./middlewares/error-handler.middleware.js";
-import authenticateUser from "./middlewares/auth.middleware.js";
-import connectDB from "./config/db.config.js";
-import { auth } from "./features/auth/index.js";
-import { mangas } from "./mangas/index.js";
 import authorizeRoles from "./middlewares/admin.middleware.js";
+import authenticateUser from "./middlewares/auth.middleware.js";
+import errorHandler from "./middlewares/error-handler.middleware.js";
+import notFound from "./middlewares/not-found.middleware.js";
+
+import connectDB from "./config/db.config.js";
+
+import auth from "./controllers/auth/auth.route.js";
+import mangas from "./controllers/mangas/route.manga.js";
+import adminRoutes from "./controllers/admin/route.admin.js";
 
 const app = express();
 
@@ -34,9 +37,9 @@ app.use(helmet());
 app.set("trust proxy", 1);
 app.use(
   rateLimit({
-    windowMs: 15 * 30 * 1000,
-    limit: 100,
-    standardHeaders: "draft-7",
+    windowMs: 15 * 30 * 1000, // 15 minutes
+    max: 100, // Limite chaque IP à 100 requêtes par fenêtre
+    standardHeaders: true,
     legacyHeaders: false
   })
 );
@@ -45,6 +48,7 @@ app.use(cors());
 
 connectDB();
 
+// Routes
 app.use(
   "/api/v1/admin",
   authenticateUser,
@@ -54,6 +58,7 @@ app.use(
 app.use("/api/v1/auth", auth);
 app.use("/api/v1/mangas", authenticateUser, mangas);
 
+// Middleware de gestion des erreurs
 app.use(notFound);
 app.use(errorHandler);
 
