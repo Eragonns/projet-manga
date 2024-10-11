@@ -1,0 +1,17 @@
+.navbar {
+  inline-size: 100%;
+  block-size: 13vh;
+  display: flex;
+  align-items: center;
+  background-color: $black;
+}
+.navbar_logo {
+  block-size: 13vh;
+}
+.navbar_liens {
+  list-style-type: none;
+}
+.navbar_lien {
+  color: $white;
+  text-decoration: none;
+}

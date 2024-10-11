@@ -1,0 +1,62 @@
+.burgerBtn_menu {
+  position: relative;
+}
+
+.burgerBtn_icon {
+  width: 30px;
+  height: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  z-index: 1000;
+  color: $white;
+}
+
+.burgerBtn_links {
+  position: fixed;
+  top: 0;
+  left: -400px;
+  width: 100%;
+  height: 100vh;
+  background-color: $black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: left 0.3s linear;
+  z-index: 999;
+}
+
+.burgerBtn_links.open {
+  left: 0;
+}
+
+.burgerBtn_links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.burgerBtn_links ul li {
+  margin: 20px 0;
+}
+
+.burgerBtn_links ul li a {
+  color: $white;
+  text-decoration: none;
+  font-size: 1.5rem;
+  transition: color 0.5s linear;
+}
+
+.burgerBtn_links ul li a:hover {
+  color: $red;
+}
+
+.burgerBtn_close {
+  height: 10px;
+  color: $white;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+}

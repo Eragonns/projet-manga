@@ -22,6 +22,7 @@ import auth from "./controllers/auth/auth.route.js";
 import mangas from "./controllers/mangas/route.manga.js";
 import adminRoutes from "./controllers/admin/route.admin.js";
 
+const swaggerDocument = YAML.load("./swagger.yaml");
 const app = express();
 
 cloudinary.config({
@@ -44,9 +45,16 @@ app.use(
   })
 );
 app.use(mongoSanitize());
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true
+  })
+);
 
 connectDB();
+
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 // Routes
 app.use(
