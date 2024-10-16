@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../contexts/AuthContext";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark, faBars } from "@fortawesome/free-solid-svg-icons";
-
+import { FaBars } from "react-icons/fa";
+import { ImCross } from "react-icons/im";
 function BurgerBtn() {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, logout } = useContext(AuthContext);
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -16,29 +18,62 @@ function BurgerBtn() {
           className={`burgerBtn_icon ${isOpen ? "open" : ""}`}
           onClick={toggleMenu}
         >
-          <FontAwesomeIcon icon={faBars} size="2x" />
+          <FaBars className="burgerBtn_reactIcon" />
         </div>
         <div className={`burgerBtn_links ${isOpen ? "open" : ""}`}>
-          <div className="burgerBtn_close" onClick={toggleMenu}>
-            <FontAwesomeIcon icon={faXmark} size="2x" />
+          <div className="burgerBtn_close" onClick={toggleMenu}></div>
+          <ImCross className="burgerBtn_close_icon" onClick={toggleMenu} />{" "}
+          <div className="burgerBtn_container">
+            <h1 className="burgerBtn_title">ScanMangaVerse</h1>
+            <ul className="burgerBtn_liens">
+              <li>
+                <NavLink to="/catalogue" className="burgerBtn_lien">
+                  Catalogue
+                </NavLink>
+              </li>
+              {user ? (
+                <>
+                  {user.role === "admin" && (
+                    <li>
+                      <NavLink
+                        to="/admin"
+                        className="burgerBtn_lien"
+                        onClick={toggleMenu}
+                      >
+                        Admin
+                      </NavLink>
+                    </li>
+                  )}
+                  <li>
+                    <button onClick={logout} className="burgerBtn_links_logout">
+                      Déconnexion
+                    </button>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <NavLink
+                      to="/login"
+                      className="burgerBtn_lien"
+                      onClick={toggleMenu}
+                    >
+                      Connexion
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/register"
+                      className="burgerBtn_lien"
+                      onClick={toggleMenu}
+                    >
+                      Inscription
+                    </NavLink>
+                  </li>
+                </>
+              )}
+            </ul>
           </div>
-          <ul>
-            <li>
-              <NavLink to="/catalogue" onClick={toggleMenu}>
-                Catalogue
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/connexion" onClick={toggleMenu}>
-                Connexion
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/inscription" onClick={toggleMenu}>
-                S&apos;inscrire
-              </NavLink>
-            </li>
-          </ul>
         </div>
       </div>
     </>

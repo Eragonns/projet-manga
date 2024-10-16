@@ -1,9 +1,9 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const { login } = useContext(AuthContext);
+  const { login, user } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -13,12 +13,23 @@ const Login = () => {
     e.preventDefault();
     try {
       await login(email, password);
-      navigate("/");
     } catch (error) {
       console.error(error);
       alert("Échec de la connexion. Veuillez vérifier vos identifiants.");
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      console.log("redirection en fonction du role: ", user.role);
+
+      if (user.role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
+    }
+  }, [user, navigate]);
 
   return (
     <div className="login-container">

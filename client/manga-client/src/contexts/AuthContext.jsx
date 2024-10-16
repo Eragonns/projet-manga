@@ -1,5 +1,5 @@
-import React, { createContext, useState, useEffect } from "react";
-import axios from "axios";
+import { createContext, useState, useEffect } from "react";
+import axiosInstance from "../utils/axiosInstance.js";
 
 export const AuthContext = createContext();
 
@@ -19,27 +19,38 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (email, password) => {
-    const response = await axios.post(
-      "http://localhost:5000/api/v1/auth/login",
-      { email, password }
-    );
-    const { token, user } = response.data;
-    setToken(token);
-    setUser(user);
-    localStorage.setItem("token", token);
-    localStorage.setItem("user", JSON.stringify(user));
+    try {
+      const response = await axiosInstance.post("/auth/login", {
+        email,
+        password
+      });
+      const { token, user } = response.data;
+      setToken(token);
+      setUser(user);
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
+    } catch (error) {
+      console.error("Erreur lors de la connexion: ", error);
+      throw error;
+    }
   };
 
   const register = async (pseudo, email, password) => {
-    const response = await axios.post(
-      "http://localhost:5000/api/v1/auth/register",
-      { pseudo, email, password }
-    );
-    const { token, user } = response.data;
-    setToken(token);
-    setUser(user);
-    localStorage.setItem("token", token);
-    localStorage.setItem("user", JSON.stringify(user));
+    try {
+      const response = await axiosInstance.post("/auth/register", {
+        pseudo,
+        email,
+        password
+      });
+      const { token, user } = response.data;
+      setToken(token);
+      setUser(user);
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
+    } catch (error) {
+      console.error("Erreur lors de l'inscription :", error);
+      throw error;
+    }
   };
 
   const logout = () => {
@@ -58,8 +69,11 @@ export const AuthProvider = ({ children }) => {
   };
 
   if (loading) {
-    return <div>Chargement...</div>; // Vous pouvez afficher un écran de chargement ici
+    return (
+      <div>
+        <div className="spinner"></div>
+      </div>
+    );
   }
-
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

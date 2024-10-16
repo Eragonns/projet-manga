@@ -17,4 +17,5 @@ const getAll = async (_req, res) => {
   const mangas = await mangasService.getAll();
   res.status(StatusCodes.OK).json({ mangas });
 };
+
 export { getUsersMangas, get, getAll };

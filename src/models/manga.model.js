@@ -1,6 +1,28 @@
 import { model, Schema } from "mongoose";
 import { MANGA_STATUS } from "../utils/constants.util.js";
 
+const ChapterSchema = new Schema(
+  {
+    title: {
+      type: String,
+      required: [true, "Veuillez fournir un titre pour le chapitre"],
+      maxlength: 100
+    },
+    images: [
+      {
+        type: String,
+        required: true,
+        maxlength: 200
+      }
+    ],
+    folderName: {
+      type: String,
+      required: true
+    }
+  },
+  { timestamps: true }
+);
+
 const MangaSchema = new Schema(
   {
     title: {
@@ -22,13 +44,8 @@ const MangaSchema = new Schema(
       enum: [MANGA_STATUS.IN_PROGRESS, MANGA_STATUS.TO_END],
       default: MANGA_STATUS.IN_PROGRESS
     },
-    images: [
-      {
-        type: String,
-        required: true,
-        maxlength: 200
-      }
-    ],
+    chapters: [ChapterSchema],
+
     createdBy: {
       type: Schema.Types.ObjectId,
       ref: "User",

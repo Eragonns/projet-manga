@@ -3,13 +3,14 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import SharedLayout from "./layouts/SharedLayout";
 
 import ErrorPage from "./pages/ErrorPage";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Admin from "./pages/Admin";
 
 import SingleError from "./components/SingleError";
-import ProtectedRoute from "./components/ProtectedRoute";
+
 import { Home } from "./pages";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Admin from "./pages/Admin";
 
 const router = createBrowserRouter([
   {

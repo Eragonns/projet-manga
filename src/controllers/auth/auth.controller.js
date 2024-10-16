@@ -5,7 +5,9 @@ import * as userService from "../../services/user.service.js";
 const register = async (req, res) => {
   const user = await userService.create(req.body);
   const token = user.createAccessToken();
-  res.status(StatusCodes.CREATED).json({ user, token });
+  res
+    .status(StatusCodes.CREATED)
+    .json({ user: { userId: user._id, role: user.role }, token });
 };
 
 const login = async (req, res) => {
@@ -19,7 +21,9 @@ const login = async (req, res) => {
 
   const token = user.createAccessToken();
 
-  res.status(StatusCodes.OK).json({ user: { userId: user._id }, token });
+  res
+    .status(StatusCodes.OK)
+    .json({ user: { userId: user._id, role: user.role }, token });
 };
 
 export { register, login };

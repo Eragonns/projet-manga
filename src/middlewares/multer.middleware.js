@@ -4,7 +4,21 @@ import path from "node:path";
 
 const storage = multer.memoryStorage();
 
-const upload = multer({ storage });
+const upload = multer({
+  storage,
+  fileFilter: (_req, file, cb) => {
+    const filetypes = /jpeg|jpg|png|gif/;
+    const mimetypes = filetypes.test(file.mimetype);
+    const extname = filetypes.test(
+      path.extname(file.originalname).toLowerCase()
+    );
+
+    if (mimetypes && extname) {
+      return cb(null, true);
+    }
+    cb(new Error("Seuls les fichiers d'images sont autorisés ."));
+  }
+});
 
 const parser = new DataParser();
 

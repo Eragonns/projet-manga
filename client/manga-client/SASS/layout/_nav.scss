@@ -3,15 +3,14 @@
   block-size: 13vh;
   display: flex;
   align-items: center;
+  justify-content: space-around;
   background-color: $black;
+}
+.navbar_title {
+  font-family: "Bangers", cursive;
+  font-size: 1.7em;
+  color: $red;
 }
 .navbar_logo {
   block-size: 13vh;
-}
-.navbar_liens {
-  list-style-type: none;
-}
-.navbar_lien {
-  color: $white;
-  text-decoration: none;
 }

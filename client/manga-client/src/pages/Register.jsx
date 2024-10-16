@@ -1,9 +1,9 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const { register } = useContext(AuthContext);
+  const { register, user } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [pseudo, setPseudo] = useState("");
@@ -14,12 +14,22 @@ const Register = () => {
     e.preventDefault();
     try {
       await register(pseudo, email, password);
-      navigate("/");
     } catch (error) {
       console.error(error);
       alert("Échec de l'inscription. Veuillez réessayer.");
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      console.log("redirection en fonction du role: ", user.role);
+      if (user.role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
+    }
+  }, [user, navigate]);
 
   return (
     <div className="register-container">
