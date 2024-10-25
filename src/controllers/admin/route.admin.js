@@ -12,17 +12,19 @@ const router = express.Router();
 
 router.post(
   "/mangas",
-  upload.array("manga", 20),
+  upload,
   validate({ bodySchema: MangaBodySchema }),
   adminController.createManga
 );
 
 router.post(
   "/mangas/:id/chapters",
-  upload.array("images", 20),
-  validate({ bodySchema: ChapterBodySchema }),
+  upload,
+  // validate({ bodySchema: ChapterBodySchema }),
   adminController.addChapter
 );
+
+router.put("/mangas/:id", adminController.update);
 
 router.get("/mangas", adminController.getAllMangas);
 

@@ -32,37 +32,45 @@ const Register = () => {
   }, [user, navigate]);
 
   return (
-    <div className="register-container">
+    <div className="register_container">
       <h2>Inscription</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="register_form">
         <div>
-          <label>Pseudo:</label>
           <input
             type="text"
             value={pseudo}
+            placeholder="Pseudo:"
             onChange={(e) => setPseudo(e.target.value)}
+            className="register_input"
+            aria-label="pseudo"
             required
           />
         </div>
         <div>
-          <label>Email:</label>
           <input
             type="email"
             value={email}
+            placeholder="Email:"
             onChange={(e) => setEmail(e.target.value)}
+            className="register_input"
+            aria-label="email"
             required
           />
         </div>
         <div>
-          <label>Mot de passe:</label>
           <input
             type="password"
             value={password}
+            placeholder="Mot de passe:"
             onChange={(e) => setPassword(e.target.value)}
+            className="register_input"
+            aria-label="Mot de passe"
             required
           />
         </div>
-        <button type="submit">S&apos;inscrire</button>
+        <button type="submit" className="register_btn">
+          S&apos;inscrire
+        </button>
       </form>
     </div>
   );

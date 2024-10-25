@@ -32,28 +32,33 @@ const Login = () => {
   }, [user, navigate]);
 
   return (
-    <div className="login-container">
-      <h2>Connexion</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="login_container">
+      <form onSubmit={handleSubmit} className="login_form">
         <div>
-          <label>Email:</label>
           <input
             type="email"
+            placeholder="Email:"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            className="login_input"
+            aria-label="email"
             required
           />
         </div>
         <div>
-          <label>Mot de passe:</label>
           <input
             type="password"
+            placeholder="Mot de passe:"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            className="login_input"
+            aria-label="Mot de passe"
             required
           />
         </div>
-        <button type="submit">Se Connecter</button>
+        <button type="submit" className="login_btn">
+          Se Connecter
+        </button>
       </form>
     </div>
   );

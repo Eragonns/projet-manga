@@ -7,6 +7,8 @@
 @import "base/typography";
 
 /*conponements*/
+@import "components/addChapterForm";
+@import "components/addMangaForm";
 @import "components/button";
 @import "components/buttonBurger";
 @import "components/caroussel";
@@ -24,12 +26,15 @@
 @import "layout/trouverunvelib";
 
 /*pages*/
+@import "pages/admin";
 @import "pages/apropos";
 @import "pages/calculateur";
 @import "pages/contact";
 @import "pages/erreur404";
 @import "pages/home";
+@import "pages/login";
 @import "pages/modeemploi";
+@import "pages/register";
 
 /*themes*/
 @import "themes/admin";
@@ -38,3 +43,4 @@
 /*vendors*/
 @import "vendors/bootstrap";
 @import "vendors/fonts";
+@import "vendors/sweetAlert";

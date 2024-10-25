@@ -2,15 +2,11 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import SharedLayout from "./layouts/SharedLayout";
 
-import ErrorPage from "./pages/ErrorPage";
-
 import SingleError from "./components/SingleError";
 
-import { Home } from "./pages";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import { Admin, ErrorPage, Home, Login, Register } from "./pages";
+
 import ProtectedRoute from "./components/ProtectedRoute";
-import Admin from "./pages/Admin";
 
 const router = createBrowserRouter([
   {

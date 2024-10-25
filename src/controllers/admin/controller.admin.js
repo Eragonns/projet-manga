@@ -3,6 +3,11 @@ import * as mangasService from "../../services/mangas.service.js";
 import { checkPermissions } from "../../utils/checkPermissions.util.js";
 import { NotFoundError } from "../../errors/index.js";
 
+import {
+  ChapterBodySchema,
+  ChapterTextBodySchema
+} from "../../schemas/manga.schema.js";
+
 import { v2 as cloudinary } from "cloudinary";
 import slugify from "slugify";
 import { StatusCodes } from "http-status-codes";
@@ -10,45 +15,84 @@ import { StatusCodes } from "http-status-codes";
 const createManga = async (req, res, next) => {
   try {
     console.log("Requete de creation de manga :", req.body, req.files);
-    const { title, author, genre, status } = req.body;
+    const { title, author, genre, description, status, chapterTitle } =
+      req.body;
+    console.log("title", title);
+    console.log("chapterTitle", chapterTitle);
 
-    const files = req.files || [];
-    if (files.length === 0) {
-      throw new Error("Aucun fichier fourni");
+    if (!title)
+      throw new Error(
+        "Le titre est requis et doit être une chaîne de caractères."
+      );
+
+    if (!chapterTitle)
+      throw new Error(
+        "Le titre du chapitre est requis et doit être une chaîne de caractères."
+      );
+
+    if (
+      !req.files ||
+      !req.files.coverImage ||
+      req.files.coverImage.length === 0
+    ) {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ message: "L'image de couverture est requise" });
     }
 
+    const coverFile = req.files.coverImage[0];
+    const mangaFiles = req.files.mangas || [];
+
     const maxSize = 1024 * 1024;
-    const images = [];
+
+    if (coverFile.size > maxSize)
+      throw new Error("L'image de couverture doit être inférieure à 1Mo");
+
+    const formattedImage = formatImage(coverFile);
+    const coverResponse = await cloudinary.uploader.upload(formattedImage, {
+      folder: "covers"
+    });
+    const coverImageUrl = coverResponse.secure_url;
 
     const slugTitle = slugify(title, { lower: true, strict: true });
     const timestamp = Date.now();
     const folderName = `mangas/${slugTitle}_${timestamp}`;
 
-    for (const file of files) {
-      if (file.size > maxSize) {
+    const images = [];
+    for (const file of mangaFiles) {
+      if (file.size > maxSize)
         throw new Error("Veuillez fournir une image de taille inferieur a 1Mo");
-      }
+
       const formattedImage = formatImage(file);
       const response = await cloudinary.uploader.upload(formattedImage, {
-        folder: folderName
+        folder: `${folderName}/chapitre_1_${slugify(chapterTitle, {
+          lower: true,
+          strict: true
+        })}`
       });
       images.push(response.secure_url);
     }
 
     const firstChapter = {
-      title: "Chapitre 1",
+      title: chapterTitle || "Chapitre 1",
       images,
-      folderName: `${folderName}/chapitre_1`
+      folderName: `${folderName}/chapitre_1_${slugify(chapterTitle, {
+        lower: true,
+        strict: true
+      })}`
     };
 
     const newManga = await mangasService.create({
       title,
       author,
       genre,
+      description,
       status,
+      coverImage: coverImageUrl,
       chapters: [firstChapter],
       createdBy: req.user.userId
     });
+
     res.status(StatusCodes.CREATED).json({ manga: newManga });
   } catch (error) {
     console.error("Erreur lors de la création du manga :", error);
@@ -58,46 +102,65 @@ const createManga = async (req, res, next) => {
 
 const addChapter = async (req, res, next) => {
   try {
+    console.log("Fichiers reçus :", req.files);
+
     const { id } = req.params;
     const { title } = req.body;
-    const files = req.files || [];
+
+    const parsedTextData = ChapterTextBodySchema.safeParse({ title });
+    if (!parsedTextData.success)
+      return res.status(StatusCodes.BAD_REQUEST).json(parsedTextData.error);
+
+    const files = req.files.chapterImages || [];
+    const maxSize = 1024 * 1024;
 
     if (files.length === 0)
       throw new Error("Aucun fichier fourni pour le chapitre");
 
-    const maxSize = 1024 * 1024;
-    const images = [];
-
     const manga = await mangasService.get(id);
     if (!manga) throw new NotFoundError(`Aucun manga trouvé avec l'ID ${id}`);
 
-    const slugTitle = slugify(title, { lower: true, strict: true });
-    const chapterNumber = manga.chapters.length + 1;
-    const folderName = `mangas/${slugify(manga.title, {
-      lower: true,
-      strict: true
-    })}_${manga.createdAt.getTime()}/chapitre_${chapterNumber}`;
+    const slugTitle = slugify(manga.title, { lower: true, strict: true });
+    const folderName = manga.chapters[0].folderName.split("/chapitre_")[0];
 
+    const chapterNumber = manga.chapters.length + 1;
+    const chapterFolder = `${folderName}/chapitre_${chapterNumber}_${slugify(
+      title,
+      {
+        lower: true,
+        strict: true
+      }
+    )}`;
+
+    const images = [];
     for (const file of files) {
       if (file.size > maxSize)
         throw new Error(
-          "Veuillez fournir une image de taille inferieur a 1 MO"
+          "Veuillez fournir une image de taille inférieure à 1 Mo"
         );
 
       const formattedImage = formatImage(file);
       const response = await cloudinary.uploader.upload(formattedImage, {
-        folder: folderName
+        folder: chapterFolder
       });
       images.push(response.secure_url);
     }
 
-    const newChapter = {
+    const parsedCompleteData = ChapterBodySchema.safeParse({
       title,
       images,
-      folderName
-    };
+      folderName: chapterFolder
+    });
 
-    const updatedManga = await mangasService.addChapter(id, newChapter);
+    if (!parsedCompleteData.success) {
+      return res.status(StatusCodes.BAD_REQUEST).json(parsedCompleteData.error);
+    }
+
+    const updatedManga = await mangasService.addChapter(
+      id,
+      parsedCompleteData.data
+    );
+
     res.status(StatusCodes.OK).json({ manga: updatedManga });
   } catch (error) {
     console.error("Erreur lors de l'ajout du chapitre :", error);
@@ -113,7 +176,6 @@ const getAllMangas = async (_req, res, next) => {
     next(error);
   }
 };
-
 const update = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -125,35 +187,68 @@ const update = async (req, res, next) => {
     next(error);
   }
 };
-
 const remove = async (req, res, next) => {
   try {
     const { id } = req.params;
-    console.log(`Tentative de suppression du manga avec l'ID : ${id}`);
+
     const manga = await mangasService.get(id);
     checkPermissions(req.user, manga.createdBy);
 
-    if (!manga) {
-      throw new NotFoundError(`Aucun manga contenant cet id ${id}`);
+    if (!manga)
+      throw new NotFoundError(`Aucun manga trouvé avec cet ID : ${id}`);
+
+    if (manga.coverImage) {
+      const coverImageId = getIdFromUrl(manga.coverImage, "covers");
+
+      try {
+        await cloudinary.uploader.destroy(coverImageId);
+      } catch (error) {
+        console.error(
+          "Erreur lors de la suppression de la coverImage :",
+          error
+        );
+      }
     }
+
     if (manga.chapters && manga.chapters.length > 0) {
       for (const chapter of manga.chapters) {
         if (chapter.folderName) {
-          console.log(
-            `Suppression des images dans le dossier : ${chapter.folderName}`
-          );
-          await cloudinary.api.delete_resources_by_prefix(chapter.folderName);
-          await cloudinary.api.delete_folder(chapter.folderName);
+          try {
+            await cloudinary.api.delete_resources_by_prefix(chapter.folderName);
+
+            await cloudinary.api.delete_folder(chapter.folderName);
+          } catch (error) {
+            console.error(
+              `Erreur lors de la suppression des ressources du chapitre : ${chapter.folderName}`,
+              error
+            );
+          }
         }
       }
     }
 
+    const rootFolderName = manga.chapters[0].folderName.split("/chapitre_")[0];
+
+    if (rootFolderName) {
+      try {
+        await cloudinary.api.delete_resources_by_prefix(rootFolderName);
+        await cloudinary.api.delete_folder(rootFolderName);
+      } catch (error) {
+        console.error("Erreur lors de la suppression du dossier racine", error);
+      }
+    }
+
     const removedManga = await mangasService.remove(id);
-    console.log(`Manga supprimé : ${removedManga.title}`);
+
     res.status(StatusCodes.OK).json({ manga: removedManga });
   } catch (error) {
     next(error);
   }
+};
+const getIdFromUrl = (url, folder) => {
+  const parts = url.split("/");
+  const id = parts[parts.length - 1].split(".")[0];
+  return `${folder}/${id}`;
 };
 
 const removeChapter = async (req, res, next) => {
@@ -167,6 +262,8 @@ const removeChapter = async (req, res, next) => {
       throw new NotFoundError(`Aucun manga trouvé avec l'ID ${mangaId}`);
 
     const chapter = manga.chapters.id(chapterId);
+    console.log("chap", chapter.folderName);
+
     if (!chapter)
       throw new NotFoundError(`Aucun chapitre trouvé avec l'ID ${chapterId}`);
 
@@ -185,5 +282,4 @@ const removeChapter = async (req, res, next) => {
     next(error);
   }
 };
-
 export { createManga, addChapter, getAllMangas, update, remove, removeChapter };

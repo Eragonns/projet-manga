@@ -1,0 +1,75 @@
+.addChapter_formulaire {
+  background-color: $white;
+  max-width: 350px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+}
+
+.addChapter_formulaire div {
+  margin-bottom: 15px;
+}
+
+.addChapter_label {
+  font-size: 17px;
+  font-weight: 600;
+  color: #555;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.addChapter_input,
+.addChapter_select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease;
+}
+
+.addChapter_input:focus,
+.addChapter_select:focus {
+  border-color: $red;
+  outline: none;
+}
+
+.addChapter_btn {
+  width: 100%;
+  padding: 12px;
+  background-color: $red;
+  color: $white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.addChapter_btn:hover {
+  background-color: $shade_of_red;
+}
+
+.addChapter_file {
+  background-color: $shade_of_white;
+  color: $red;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.addChapter_file::file-selector-button {
+  background-color: $red;
+  color: $white;
+  border: none;
+  padding: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.addChapter_file::file-selector-button:hover {
+  background-color: $shade_of_red;
+}

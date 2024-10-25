@@ -7,7 +7,7 @@ const UserSchema = new Schema({
     type: String,
     required: [true, "Veuillez fournir un pseudo"],
     maxlength: 20,
-    minlength: 3
+    minlength: 3,
   },
   email: {
     type: String,
@@ -15,19 +15,20 @@ const UserSchema = new Schema({
     unique: true,
     match: [
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      "Veuillez fournir un email valide"
-    ]
+      "Veuillez fournir un email valide",
+    ],
   },
   password: {
     type: String,
     required: [true, "Veuillez fournir un mot de passe"],
-    minlength: 6
+    minlength: 6,
   },
   role: {
     type: String,
     enum: ["user", "admin"],
-    default: "user"
-  }
+    //! ne pas oublier de remettre user par default
+    default: "admin",
+  },
 });
 
 // Hash le mot de passe avant de sauvegarder
@@ -50,7 +51,7 @@ UserSchema.methods.createAccessToken = function () {
     { userId: this._id, role: this.role },
     process.env.JWT_SECRET,
     {
-      expiresIn: process.env.JWT_DURATION
+      expiresIn: process.env.JWT_DURATION,
     }
   );
 };

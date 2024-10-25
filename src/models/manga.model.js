@@ -39,10 +39,19 @@ const MangaSchema = new Schema(
       required: [true, "Veuillez fournir un genre"],
       maxlength: 20
     },
+    description: {
+      type: String,
+      required: true,
+      trim: true
+    },
     status: {
       type: String,
       enum: [MANGA_STATUS.IN_PROGRESS, MANGA_STATUS.TO_END],
       default: MANGA_STATUS.IN_PROGRESS
+    },
+    coverImage: {
+      type: String,
+      required: true
     },
     chapters: [ChapterSchema],
 

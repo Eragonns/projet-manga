@@ -18,7 +18,11 @@ const upload = multer({
     }
     cb(new Error("Seuls les fichiers d'images sont autorisés ."));
   }
-});
+}).fields([
+  { name: "coverImage", maxCount: 1 },
+  { name: "mangas", maxCount: 30 },
+  { name: "chapterImages", maxCount: 30 }
+]);
 
 const parser = new DataParser();
 

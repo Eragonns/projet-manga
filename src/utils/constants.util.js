@@ -3,4 +3,18 @@ const MANGA_STATUS = {
   TO_END: "Terminé"
 };
 
-export { MANGA_STATUS };
+const MANGA_GENRES = [
+  "Action",
+  "Aventure",
+  "Comédie",
+  "Drame",
+  "Fantastique",
+  "Horreur",
+  "Mystère",
+  "Romance",
+  "Science-Fiction",
+  "Sports",
+  "Thriller"
+];
+
+export { MANGA_STATUS, MANGA_GENRES };

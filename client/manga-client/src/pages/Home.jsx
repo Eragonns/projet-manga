@@ -23,6 +23,8 @@ function Home() {
           <li key={manga._id}>
             <h2>{manga.title}</h2>
             <p>{manga.description}</p>
+            <p>{console.log(manga)}</p>
+            <p>{manga.chapters[0].images}</p>
           </li>
         ))}
       </ul>
