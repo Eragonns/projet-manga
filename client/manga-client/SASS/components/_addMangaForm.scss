@@ -5,7 +5,7 @@
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e0e0e0;
+  border: 1px solid $white;
 }
 
 .addManga_formulaire div {
@@ -26,9 +26,9 @@ textarea {
   width: 100%;
   padding: 10px;
   font-size: 16px;
-  border: 1px solid #ccc;
+  border: 1px solid $shade_of_white;
   border-radius: 5px;
-  background-color: #f9f9f9;
+  background-color: $white;
   transition: border-color 0.3s ease;
 }
 
@@ -80,4 +80,37 @@ textarea:focus {
 
 .addManga_file::file-selector-button:hover {
   background-color: $shade_of_red;
+}
+
+.addManga_dropdownContainer {
+  position: relative;
+  color: $black;
+}
+
+.addManga_dropdownBtn {
+  padding: 10px;
+  border: 1px solid $shade_of_white;
+  cursor: pointer;
+}
+
+.addManga_dropdownMenu {
+  position: absolute;
+  background-color: $white;
+  border: 1px solid $shade_of_white;
+  width: 100%;
+  z-index: 1000;
+  max-height: 150px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.addManga_dropdownItem {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+}
+
+.addManga_dropdownItem input {
+  margin-right: 5px;
 }

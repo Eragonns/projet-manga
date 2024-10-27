@@ -4,25 +4,23 @@ import { AuthContext } from "../contexts/AuthContext.jsx";
 import dialogBox from "../utils/dialogBox.js";
 import Swal from "sweetalert2";
 
-const MangaListPage = () => {
+const MangaListPage = ({ fetchMangas }) => {
   const { token } = useContext(AuthContext);
   const [mangas, setMangas] = useState([]);
 
   useEffect(() => {
-    fetchMangas();
-  }, []);
-
-  const fetchMangas = async () => {
-    try {
-      const response = await axiosInstance.get("/admin/mangas", {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-
-      setMangas(response.data.mangas);
-    } catch (error) {
-      console.error("Échec de la récupération des mangas", error);
-    }
-  };
+    const loadMangas = async () => {
+      try {
+        const response = await axiosInstance.get("/admin/mangas", {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        setMangas(response.data.mangas);
+      } catch (error) {
+        console.error("Échec de la récupération des mangas", error);
+      }
+    };
+    loadMangas();
+  }, [token]);
 
   const handleDelete = async (id) => {
     const confirmed = await dialogBox(
@@ -34,6 +32,9 @@ const MangaListPage = () => {
         await axiosInstance.delete(`/admin/mangas/${id}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
+        setMangas((prevMangas) =>
+          prevMangas.filter((manga) => manga._id !== id)
+        );
         Swal.fire("Supprimé", "Manga supprimé avec succès !", "success");
         fetchMangas();
       } catch (error) {
@@ -58,12 +59,26 @@ const MangaListPage = () => {
           {
             headers: { Authorization: `Bearer ${token}` }
           };
+        setMangas((prevMangas) =>
+          prevMangas.map((manga) =>
+            manga._id === mangaId
+              ? {
+                  ...manga,
+                  chapters: manga.chapters.filter(
+                    (chapter) => chapter._id !== chapterId
+                  )
+                }
+              : manga
+          )
+        );
         Swal.fire("Supprimé", "Chapitre supprimé avec succès !", "success");
         fetchMangas();
       } catch (error) {
         console.error("Échec de la suppression du chapitre", error);
         Swal.fire("Annulé", "Suppression annulée", "info");
       }
+    } else {
+      Swal.fire("Annulé", "Suppression annulée", "info");
     }
   };
 
@@ -81,7 +96,7 @@ const MangaListPage = () => {
             </p>
             <p>
               <strong>Genre: </strong>
-              {manga.genre}
+              {manga.genre.join(", ")}
             </p>
             <p>
               <strong>État: </strong>
@@ -89,17 +104,15 @@ const MangaListPage = () => {
             </p>
             <button
               onClick={() => {
-                console.log(manga);
                 handleDelete(manga._id);
               }}
             >
-              Supprimer
+              Supprimer ce Manga
             </button>
             <>
               <strong>Chapitres:</strong>
               <ul>
                 {manga.chapters.map((chapter) => {
-                  console.log(chapter);
                   return (
                     <li key={chapter._id}>
                       <p>{chapter.title}</p>{" "}
@@ -108,7 +121,7 @@ const MangaListPage = () => {
                           handleDeleteChapter(manga._id, chapter._id)
                         }
                       >
-                        del
+                        Supprimer ce chapitre
                       </button>
                     </li>
                   );

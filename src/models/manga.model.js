@@ -35,7 +35,7 @@ const MangaSchema = new Schema(
       required: [true, "Veuillez fournir le nom de l'auteur"]
     },
     genre: {
-      type: String,
+      type: [String],
       required: [true, "Veuillez fournir un genre"],
       maxlength: 20
     },

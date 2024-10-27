@@ -5,7 +5,6 @@ import AddMangaForm from "../components/AddMangaForm";
 
 const AddMangaPage = () => {
   const { token } = useContext(AuthContext);
-  const [mangas, setMangas] = useState([]);
   const [formData, setFormData] = useState({
     title: "",
     author: "",
@@ -26,14 +25,13 @@ const AddMangaPage = () => {
     const data = new FormData();
     data.append("title", formData.title);
     data.append("author", formData.author);
-    data.append("genre", formData.genre);
+    formData.genre.forEach((genre) => data.append("genre", genre));
     data.append("description", formData.description);
     data.append("status", formData.status);
     data.append("coverImage", formData.coverImage);
     for (let i = 0; i < formData.images.length; i++) {
       data.append("mangas", formData.images[i]);
     }
-    console.log("data:", [...data]);
 
     try {
       await axiosInstance.post("/admin/mangas", data, {
@@ -43,11 +41,11 @@ const AddMangaPage = () => {
         }
       });
       alert("Manga ajouté avec succès !");
-      fetchMangas();
+
       setFormData({
         title: "",
         author: "",
-        genre: "",
+        genre: [],
         description: "",
         status: "En Cours",
         coverImage: "",
@@ -62,7 +60,12 @@ const AddMangaPage = () => {
   return (
     <div>
       <h2>Ajouter un Manga</h2>
-      <AddMangaForm token={token} handleAddManga={handleAddManga} />
+      <AddMangaForm
+        token={token}
+        formData={formData}
+        setFormData={setFormData}
+        handleAddManga={handleAddManga}
+      />
     </div>
   );
 };

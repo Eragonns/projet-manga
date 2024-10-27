@@ -6,10 +6,12 @@ import AddChapterForm from "../components/AddChapterForm";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import MangaListPage from "../components/MangaList";
+import EditMangaForm from "../components/EditMangaForm";
 
 const Admin = () => {
   const { token } = useContext(AuthContext);
   const [mangas, setMangas] = useState([]);
+  const [editManga, setEditManga] = useState(null);
 
   useEffect(() => {
     fetchMangas();
@@ -26,20 +28,22 @@ const Admin = () => {
       alert("Échec de la récupération des mangas.");
     }
   };
-
-  // const handleDelete = async (id) => {
-  //   if (!window.confirm("Voulez-vous vraiment supprimer ce manga ?")) return;
-  //   try {
-  //     await axiosInstance.delete(`/admin/mangas/${id}`, {
-  //       headers: { Authorization: `Bearer ${token}` }
-  //     });
-  //     alert("Manga supprimé avec succès !");
-  //     fetchMangas();
-  //   } catch (error) {
-  //     console.error(error);
-  //     alert("Échec de la suppression du manga.");
-  //   }
-  // };
+  const handleUpdateManga = async (updatedManga) => {
+    try {
+      await axiosInstance.put(
+        `/admin/mangas/${updatedManga._id}`,
+        updatedManga,
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      );
+      fetchMangas();
+      setEditManga(null);
+    } catch (error) {
+      console.error(error);
+      alert("Échec de la mise à jour du manga.");
+    }
+  };
 
   return (
     <div className="admin_container">
@@ -58,7 +62,18 @@ const Admin = () => {
           />
         </div>
         <div>
-          <MangaListPage />
+          <EditMangaForm
+            editManga={editManga}
+            handleUpdateManga={handleUpdateManga}
+            setEditManga={setEditManga}
+            mangas={mangas}
+          />
+        </div>
+        <div>
+          <MangaListPage
+            fetchMangas={fetchMangas}
+            setEditManga={setEditManga}
+          />
         </div>
       </Carousel>
     </div>

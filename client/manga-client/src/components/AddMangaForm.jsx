@@ -1,4 +1,6 @@
 import { useRef, useState } from "react";
+import { nanoid } from "nanoid";
+
 import axiosInstance from "../utils/axiosInstance.js";
 import Swal from "sweetalert2";
 import { MANGA_GENRES } from "../../../../src/utils/constants.util.js";
@@ -16,6 +18,7 @@ const AddMangaForm = ({ fetchMangas, token }) => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showGenreDropdown, setShowGenreDropdown] = useState(false);
 
   const coverImageRef = useRef(null);
   const imagesRef = useRef(null);
@@ -30,18 +33,18 @@ const AddMangaForm = ({ fetchMangas, token }) => {
       if (files && files.length > 0) {
         setFormData((prev) => ({ ...prev, coverImage: files[0] }));
       }
-    } else if (name === "genre") {
-      const options = e.target.options;
-      const selectedGenre = [];
-      for (let i = 0; i < options.length; i++) {
-        if (options[i].selected) {
-          selectedGenre.push(options[i].value);
-        }
-      }
-      setFormData((prev) => ({ ...prev, genre: selectedGenre }));
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
     }
+  };
+
+  const handleGenreChange = (genre) => {
+    setFormData((prev) => ({
+      ...prev,
+      genre: prev.genre.includes(genre)
+        ? prev.genre.filter((g) => g !== genre)
+        : [...prev.genre, genre]
+    }));
   };
 
   const handleAddManga = async (e) => {
@@ -51,7 +54,7 @@ const AddMangaForm = ({ fetchMangas, token }) => {
     const data = new FormData();
     data.append("title", formData.title);
     data.append("author", formData.author);
-    data.append("genre", JSON.stringify(formData.genre));
+    formData.genre.forEach((genre) => data.append("genre", genre));
     data.append("description", formData.description);
     data.append("status", formData.status);
     data.append("coverImage", formData.coverImage);
@@ -132,20 +135,31 @@ const AddMangaForm = ({ fetchMangas, token }) => {
       </div>
       <div>
         <label className="addManga_label">Genre:</label>
-        <select
-          multiple
-          name="genre"
-          value={formData.genre}
-          onChange={handleChange}
-          className="addManga_select"
-        >
-          {MANGA_GENRES.map((genre) => (
-            <option key={genre} value={genre}>
-              {genre}
-            </option>
-          ))}
-        </select>
+        <div className="addManga_dropdownContainer">
+          <button
+            type="button"
+            className="addManga_dropdownBtn"
+            onClick={() => setShowGenreDropdown(!showGenreDropdown)}
+          >
+            Sélectionner des genres
+          </button>
+          {showGenreDropdown && (
+            <div className="addManga_dropdownMenu">
+              {MANGA_GENRES.map((genre) => (
+                <label key={nanoid()} className="addManga_dropdownItem">
+                  <input
+                    type="checkbox"
+                    checked={formData.genre.includes(genre)}
+                    onChange={() => handleGenreChange(genre)}
+                  />
+                  {genre}
+                </label>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
+
       <div>
         <label className="addManga_label">Synopsis:</label>
         <textarea

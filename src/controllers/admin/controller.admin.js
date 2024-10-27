@@ -14,11 +14,10 @@ import { StatusCodes } from "http-status-codes";
 
 const createManga = async (req, res, next) => {
   try {
-    console.log("Requete de creation de manga :", req.body, req.files);
+    console.log("Données reçues :", req.body);
+    console.log("Fichiers reçus :", req.files);
     const { title, author, genre, description, status, chapterTitle } =
       req.body;
-    console.log("title", title);
-    console.log("chapterTitle", chapterTitle);
 
     if (!title)
       throw new Error(
