@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Swal from "sweetalert2";
+import PropTypes from "prop-types";
 
 const EditMangaForm = ({ handleUpdateManga, setEditManga, mangas }) => {
   const [selectedManga, setSelectedManga] = useState(null);
@@ -162,6 +163,12 @@ const EditMangaForm = ({ handleUpdateManga, setEditManga, mangas }) => {
       )}
     </div>
   );
+};
+
+EditMangaForm.propTypes = {
+  handleUpdateManga: PropTypes.func,
+  setEditManga: PropTypes.func,
+  mangas: PropTypes.array
 };
 
 export default EditMangaForm;

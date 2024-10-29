@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { nanoid } from "nanoid";
+import PropTypes from "prop-types";
 
 import axiosInstance from "../utils/axiosInstance.js";
 import Swal from "sweetalert2";
@@ -265,6 +266,11 @@ const AddMangaForm = ({ fetchMangas, token }) => {
       </button>
     </form>
   );
+};
+
+AddMangaForm.propTypes = {
+  fetchMangas: PropTypes.func,
+  token: PropTypes.string
 };
 
 export default AddMangaForm;

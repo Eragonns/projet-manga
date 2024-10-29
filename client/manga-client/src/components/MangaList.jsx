@@ -3,6 +3,7 @@ import axiosInstance from "../utils/axiosInstance.js";
 import { AuthContext } from "../contexts/AuthContext.jsx";
 import dialogBox from "../utils/dialogBox.js";
 import Swal from "sweetalert2";
+import PropTypes from "prop-types";
 
 const MangaListPage = ({ fetchMangas }) => {
   const { token } = useContext(AuthContext);
@@ -133,6 +134,10 @@ const MangaListPage = ({ fetchMangas }) => {
       </ul>
     </div>
   );
+};
+
+MangaListPage.propTypes = {
+  fetchMangas: PropTypes.func
 };
 
 export default MangaListPage;

@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import axiosInstance from "../utils/axiosInstance.js";
 import Swal from "sweetalert2";
+import PropTypes from "prop-types";
 
 const AddChapterForm = ({ mangas, fetchMangas, token }) => {
   const [chapterData, setChapterData] = useState({
@@ -148,4 +149,9 @@ const AddChapterForm = ({ mangas, fetchMangas, token }) => {
   );
 };
 
+AddChapterForm.propTypes = {
+  mangas: PropTypes.array,
+  fetchMangas: PropTypes.func,
+  token: PropTypes.string
+};
 export default AddChapterForm;
