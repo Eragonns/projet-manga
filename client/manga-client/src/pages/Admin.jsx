@@ -28,20 +28,29 @@ const Admin = () => {
       alert("Échec de la récupération des mangas.");
     }
   };
-  const handleUpdateManga = async (updatedManga) => {
+  const handleUpdateManga = async (updateData) => {
     try {
+      console.log("update", updateData);
+
       await axiosInstance.put(
-        `/admin/mangas/${updatedManga._id}`,
-        updatedManga,
+        `/admin/mangas/${updateData.get("_id")}`,
+        updateData,
         {
-          headers: { Authorization: `Bearer ${token}` }
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data"
+          }
         }
       );
+
       fetchMangas();
       setEditManga(null);
     } catch (error) {
       console.error(error);
-      alert("Échec de la mise à jour du manga.");
+      alert(
+        error.response?.data?.message || "Échec de la mise à jour du manga."
+      );
+      console.error("Erreur lors de la mise à jour du manga :", error);
     }
   };
 
@@ -62,6 +71,9 @@ const Admin = () => {
           />
         </div>
         <div>
+          <h3 className="admin_carousel_title ">
+            Sélectionnez un manga à modifier
+          </h3>
           <EditMangaForm
             editManga={editManga}
             handleUpdateManga={handleUpdateManga}

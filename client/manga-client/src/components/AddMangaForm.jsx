@@ -49,6 +49,7 @@ const AddMangaForm = ({ fetchMangas, token }) => {
 
   const handleAddManga = async (e) => {
     e.preventDefault();
+
     setIsSubmitting(true);
 
     const data = new FormData();
@@ -105,17 +106,21 @@ const AddMangaForm = ({ fetchMangas, token }) => {
   const isForm =
     !formData.title ||
     !formData.author ||
-    !formData.genre.length === 0 ||
+    formData.genre.length === 0 ||
     !formData.description ||
     !formData.chapterTitle;
 
   return (
     <form onSubmit={handleAddManga} className="addManga_formulaire">
       <div>
-        <label className="addManga_label">Titre:</label>
+        <label className="addManga_label" htmlFor="title">
+          Titre:
+        </label>
         <input
           type="text"
           name="title"
+          id="title"
+          aria-label="titre"
           className="addManga_input"
           value={formData.title}
           onChange={handleChange}
@@ -123,10 +128,14 @@ const AddMangaForm = ({ fetchMangas, token }) => {
         />
       </div>
       <div>
-        <label className="addManga_label">Auteur:</label>
+        <label className="addManga_label" htmlFor="author">
+          Auteur:
+        </label>
         <input
           type="text"
           name="author"
+          id="author"
+          aria-label="auteur"
           className="addManga_input"
           value={formData.author}
           onChange={handleChange}
@@ -134,11 +143,15 @@ const AddMangaForm = ({ fetchMangas, token }) => {
         />
       </div>
       <div>
-        <label className="addManga_label">Genre:</label>
+        <label className="addManga_label" htmlFor="dropdown">
+          Genre:
+        </label>
         <div className="addManga_dropdownContainer">
           <button
             type="button"
             className="addManga_dropdownBtn"
+            aria-label="selectionner genre"
+            id="dropdown"
             onClick={() => setShowGenreDropdown(!showGenreDropdown)}
           >
             Sélectionner des genres
@@ -146,9 +159,15 @@ const AddMangaForm = ({ fetchMangas, token }) => {
           {showGenreDropdown && (
             <div className="addManga_dropdownMenu">
               {MANGA_GENRES.map((genre) => (
-                <label key={nanoid()} className="addManga_dropdownItem">
+                <label
+                  key={nanoid()}
+                  className="addManga_dropdownItem"
+                  htmlFor="genre"
+                >
                   <input
                     type="checkbox"
+                    id="genre"
+                    aria-label="genre"
                     checked={formData.genre.includes(genre)}
                     onChange={() => handleGenreChange(genre)}
                   />
@@ -161,9 +180,13 @@ const AddMangaForm = ({ fetchMangas, token }) => {
       </div>
 
       <div>
-        <label className="addManga_label">Synopsis:</label>
+        <label className="addManga_label" htmlFor="description">
+          Synopsis:
+        </label>
         <textarea
           name="description"
+          id="description"
+          aria-label="synopsis"
           className="addManga_textarea"
           value={formData.description}
           onChange={handleChange}
@@ -171,9 +194,13 @@ const AddMangaForm = ({ fetchMangas, token }) => {
         />
       </div>
       <div>
-        <label className="addManga_label">Statut:</label>
+        <label className="addManga_label" htmlFor="status">
+          Statut:
+        </label>
         <select
           name="status"
+          id="status"
+          aria-label="statut"
           value={formData.status}
           onChange={handleChange}
           className="addManga_select"
@@ -183,10 +210,14 @@ const AddMangaForm = ({ fetchMangas, token }) => {
         </select>
       </div>
       <div>
-        <label className="addManga_label">Titre du Chapitre:</label>
+        <label className="addManga_label" htmlFor="chapterTitle">
+          Titre du Chapitre:
+        </label>
         <input
           type="text"
           name="chapterTitle"
+          id="chapterTitle"
+          aria-label="titre du chapitre"
           className="addManga_input"
           value={formData.chapterTitle}
           onChange={handleChange}
@@ -194,10 +225,14 @@ const AddMangaForm = ({ fetchMangas, token }) => {
         />
       </div>
       <div>
-        <label className="addManga_label">Image de couverture:</label>
+        <label className="addManga_label" htmlFor="coverImage">
+          Image de couverture:
+        </label>
         <input
           type="file"
           name="coverImage"
+          id="coverImage"
+          aria-label="image de couverture"
           className="addManga_input addManga_file"
           onChange={handleChange}
           accept="image/*"
@@ -205,10 +240,14 @@ const AddMangaForm = ({ fetchMangas, token }) => {
         />
       </div>
       <div>
-        <label className="addManga_label">Images:</label>
+        <label className="addManga_label" htmlFor="images">
+          Images:
+        </label>
         <input
           type="file"
           name="images"
+          id="images"
+          aria-label="images"
           className="addManga_input addManga_file"
           multiple
           accept="image/*"
@@ -219,6 +258,7 @@ const AddMangaForm = ({ fetchMangas, token }) => {
       <button
         type="submit"
         className="addManga_btn"
+        aria-label="bouton d'envoie"
         disabled={isForm || isSubmitting}
       >
         {isSubmitting ? "Ajout en cours..." : "Ajouter Manga"}

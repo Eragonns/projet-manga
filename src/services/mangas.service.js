@@ -20,8 +20,10 @@ const remove = (id) => {
   return Manga.findByIdAndDelete(id);
 };
 
-const update = (id, data) => {
-  return Manga.findByIdAndUpdate(id, data, {
+const update = (id, updateData) => {
+  console.log("updateData", updateData);
+
+  return Manga.findByIdAndUpdate(id, updateData, {
     new: true,
     runValidators: true
   });

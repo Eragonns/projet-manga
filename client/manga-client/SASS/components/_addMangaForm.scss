@@ -1,5 +1,6 @@
 .addManga_formulaire {
   background-color: $white;
+  inline-size: 90%;
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
@@ -91,6 +92,10 @@ textarea:focus {
   padding: 10px;
   border: 1px solid $shade_of_white;
   cursor: pointer;
+}
+.addManga_dropdownBtn:hover {
+  background-color: $red;
+  color: $white;
 }
 
 .addManga_dropdownMenu {

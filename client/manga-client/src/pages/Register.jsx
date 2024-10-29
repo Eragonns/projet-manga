@@ -36,8 +36,10 @@ const Register = () => {
       <h2>Inscription</h2>
       <form onSubmit={handleSubmit} className="register_form">
         <div>
+          <label htmlFor="pseudo" className="sr-only"></label>
           <input
             type="text"
+            id="pseudo"
             value={pseudo}
             placeholder="Pseudo:"
             onChange={(e) => setPseudo(e.target.value)}
@@ -47,8 +49,10 @@ const Register = () => {
           />
         </div>
         <div>
+          <label htmlFor="email" className="sr-only"></label>
           <input
             type="email"
+            id="email"
             value={email}
             placeholder="Email:"
             onChange={(e) => setEmail(e.target.value)}
@@ -58,8 +62,10 @@ const Register = () => {
           />
         </div>
         <div>
+          <label htmlFor="password" className="sr-only"></label>
           <input
             type="password"
+            id="password"
             value={password}
             placeholder="Mot de passe:"
             onChange={(e) => setPassword(e.target.value)}
@@ -68,7 +74,11 @@ const Register = () => {
             required
           />
         </div>
-        <button type="submit" className="register_btn">
+        <button
+          type="submit"
+          className="register_btn"
+          aria-label="boutton d'inscription"
+        >
           S&apos;inscrire
         </button>
       </form>

@@ -24,7 +24,7 @@ router.post(
   adminController.addChapter
 );
 
-router.put("/mangas/:id", adminController.update);
+router.put("/mangas/:id", upload, adminController.update);
 
 router.get("/mangas", adminController.getAllMangas);
 

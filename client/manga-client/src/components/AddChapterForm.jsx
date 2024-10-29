@@ -14,14 +14,10 @@ const AddChapterForm = ({ mangas, fetchMangas, token }) => {
   const chapterImageRef = useRef(null);
 
   const handleChapterChange = (e) => {
-    console.log("Évenement onChange déclenché");
-
     const { name, value, files } = e.target;
 
     if (name === "chapterImages") {
       if (files && files.length > 0) {
-        console.log("fichiers selection", files);
-
         setChapterData((prev) => ({ ...prev, images: Array.from(files) }));
       }
     } else {
@@ -40,15 +36,8 @@ const AddChapterForm = ({ mangas, fetchMangas, token }) => {
     for (let i = 0; i < chapterData.images.length; i++) {
       data.append("chapterImages", chapterData.images[i]);
     }
-    console.log("Titre du chapitre:", chapterData.title);
-    console.log("Fichiers sélectionnés:", chapterData.images);
-    for (let pair of data.entries()) {
-      console.log(`${pair[0]}: ${pair[1]}`);
-    }
 
     try {
-      console.log(chapterData.mangaId);
-
       await axiosInstance.post(
         `/admin/mangas/${chapterData.mangaId}/chapters`,
         data,
@@ -90,20 +79,26 @@ const AddChapterForm = ({ mangas, fetchMangas, token }) => {
       setIsSubmitting(false);
     }
   };
-
+  const sortedMangas = mangas
+    .slice()
+    .sort((a, b) => a.title.localeCompare(b.title));
   return (
     <form onSubmit={handleAddChapter} className="addChapter_formulaire">
       <div>
-        <label className="addChapter_label">Manga:</label>
+        <label className="addChapter_label" htmlFor="mangaId">
+          Manga:
+        </label>
         <select
           name="mangaId"
+          id="mangaId"
+          aria-label="liste des manga"
           value={chapterData.mangaId}
           onChange={handleChapterChange}
           className="addChapter_select"
           required
         >
           <option value="">Sélectionner un Manga</option>
-          {mangas.map((manga) => (
+          {sortedMangas.map((manga) => (
             <option key={manga._id} value={manga._id}>
               {manga.title}
             </option>
@@ -111,10 +106,14 @@ const AddChapterForm = ({ mangas, fetchMangas, token }) => {
         </select>
       </div>
       <div>
-        <label className="addChapter_label">Titre du Chapitre:</label>
+        <label className="addChapter_label" htmlFor="title">
+          Titre du Chapitre:
+        </label>
         <input
           type="text"
           name="title"
+          id="title"
+          aria-label="titre du chapitre"
           value={chapterData.title}
           onChange={handleChapterChange}
           className="addChapter_input"
@@ -122,10 +121,14 @@ const AddChapterForm = ({ mangas, fetchMangas, token }) => {
         />
       </div>
       <div>
-        <label className="addChapter_label">Images du Chapitre:</label>
+        <label className="addChapter_label" htmlFor="chapterImages">
+          Images du Chapitre:
+        </label>
         <input
           type="file"
           name="chapterImages"
+          id="chapterImages"
+          aria-label="images du chapitre"
           multiple
           accept="image/*"
           onChange={handleChapterChange}
@@ -136,6 +139,7 @@ const AddChapterForm = ({ mangas, fetchMangas, token }) => {
       <button
         type="submit"
         className="addChapter_btn"
+        aria-label="boutton d'ajout du chapitre"
         disabled={setChapterData.title || isSubmitting}
       >
         {isSubmitting ? "Ajout en cours..." : "Ajouter Chapitre"}

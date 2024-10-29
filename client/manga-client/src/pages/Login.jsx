@@ -35,9 +35,11 @@ const Login = () => {
     <div className="login_container">
       <form onSubmit={handleSubmit} className="login_form">
         <div>
+          <label htmlFor="email" className="sr-only"></label>
           <input
             type="email"
             placeholder="Email:"
+            id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="login_input"
@@ -46,9 +48,11 @@ const Login = () => {
           />
         </div>
         <div>
+          <label htmlFor="password" className="sr-only"></label>
           <input
             type="password"
             placeholder="Mot de passe:"
+            id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="login_input"
@@ -56,7 +60,11 @@ const Login = () => {
             required
           />
         </div>
-        <button type="submit" className="login_btn">
+        <button
+          type="submit"
+          className="login_btn"
+          aria-label="boutton de connexion"
+        >
           Se Connecter
         </button>
       </form>
