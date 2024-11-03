@@ -4,16 +4,24 @@ const create = (data) => {
   return Manga(data).save();
 };
 
-const getAll = () => {
-  return Manga.find({});
+const getAll = async () => {
+  return Manga.find({}).select("-__v");
 };
 
 // const getUsersMangas = (id) => {
 //   return Manga.find({ createdBy: id });
 // };
 
-const get = (id) => {
-  return Manga.findById(id);
+const get = async (mangaId) => {
+  return Manga.findById(mangaId).populate("chapters");
+};
+
+const getChapterById = async (mangaId, chapterId) => {
+  const manga = await Manga.findById(mangaId);
+  if (!manga) return null;
+
+  const chapter = manga.chapters.id(chapterId);
+  return chapter;
 };
 
 const remove = (id) => {
@@ -45,4 +53,13 @@ const removeChapter = (mangaId, chapterId) => {
   );
 };
 
-export { create, getAll, get, remove, update, addChapter, removeChapter };
+export {
+  create,
+  getAll,
+  get,
+  getChapterById,
+  remove,
+  update,
+  addChapter,
+  removeChapter
+};

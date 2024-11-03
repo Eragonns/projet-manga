@@ -8,6 +8,16 @@ const MangaParamsSchema = z.object({
     message: "Format de l' ID invalide"
   })
 });
+
+const ChapterParamsSchema = z.object({
+  mangaId: z.string().refine((id) => mongoose.isValidObjectId(id), {
+    message: "Format de l' ID de manga invalide"
+  }),
+  chapterId: z.string().refine((id) => mongoose.isValidObjectId(id), {
+    message: "Format de l' ID de chapitre invalide"
+  })
+});
+
 const ChapterTextBodySchema = z.object({
   title: z
     .string()
@@ -50,6 +60,7 @@ const MangaBodySchema = z.object({
 
 export {
   MangaParamsSchema,
+  ChapterParamsSchema,
   MangaBodySchema,
   ChapterBodySchema,
   ChapterTextBodySchema

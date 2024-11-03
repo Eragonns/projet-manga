@@ -6,7 +6,9 @@ const storage = multer.memoryStorage();
 
 const upload = multer({
   storage,
-  fileFilter: (_req, file, cb) => {
+  fileFilter: (req, file, cb) => {
+    console.log("test:", req.body);
+
     const filetypes = /jpeg|jpg|png|gif/;
     const mimetypes = filetypes.test(file.mimetype);
     const extname = filetypes.test(
@@ -21,7 +23,8 @@ const upload = multer({
 }).fields([
   { name: "coverImage", maxCount: 1 },
   { name: "mangas", maxCount: 30 },
-  { name: "chapterImages", maxCount: 30 }
+  { name: "chapterImages", maxCount: 30 },
+  { name: "profileImage", maxCount: 1 }
 ]);
 
 const parser = new DataParser();

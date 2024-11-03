@@ -17,12 +17,7 @@ router.post(
   adminController.createManga
 );
 
-router.post(
-  "/mangas/:id/chapters",
-  upload,
-  // validate({ bodySchema: ChapterBodySchema }),
-  adminController.addChapter
-);
+router.post("/mangas/:id/chapters", upload, adminController.addChapter);
 
 router.put("/mangas/:id", upload, adminController.update);
 

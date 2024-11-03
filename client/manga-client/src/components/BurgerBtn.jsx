@@ -1,13 +1,13 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
-import { useContext } from "react";
+
 import { AuthContext } from "../contexts/AuthContext";
 
 import { FaBars } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
 function BurgerBtn() {
   const [isOpen, setIsOpen] = useState(false);
-  const { user, logout } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext) || [];
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -27,8 +27,17 @@ function BurgerBtn() {
             <h1 className="burgerBtn_title">ScanMangaVerse</h1>
             <ul className="burgerBtn_liens">
               <li>
-                <NavLink to="/catalogue" className="burgerBtn_lien">
+                <NavLink to="/" className="burgerBtn_lien" onClick={toggleMenu}>
                   Catalogue
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/profile"
+                  className="BurgerBtn_lien"
+                  onClick={toggleMenu}
+                >
+                  profil
                 </NavLink>
               </li>
               {user ? (

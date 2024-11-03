@@ -1,0 +1,70 @@
+.chapterPage_container {
+  position: relative;
+  top: 6.5em;
+  background-color: $black;
+}
+
+.chapterPage_btns {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  gap: 0.5em;
+}
+
+.chapterPage_btn {
+  font-family: $font-title;
+  font-size: 1em;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  background-color: $white;
+  color: $black;
+  padding: 0.5em;
+  margin-block: 1em;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.chapterPage_btn:hover {
+  background-color: $shade_of_red;
+  color: $white;
+}
+.chapterPage_reactIcon {
+  font-size: 1.5em;
+}
+
+.chapterPage_btnToTop {
+  position: fixed;
+  bottom: 2px;
+  right: 3px;
+  background-color: $red;
+  color: $white;
+  border: none;
+  border-radius: 50%;
+  padding: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.chapterPage_btnToTop:hover {
+  background-color: $white;
+  color: $black;
+}
+.chapterPage_title {
+  padding-block: 2em 0.5em;
+  text-align: center;
+  color: $white;
+}
+
+.chapterPage_image {
+  height: auto;
+  padding: 0;
+  margin-inline: 2em;
+}
+.chapterPage_imagesContainer {
+  margin-inline: 1.5em;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}

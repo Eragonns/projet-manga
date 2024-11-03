@@ -16,4 +16,21 @@ const getAll = async (_req, res) => {
   res.status(StatusCodes.OK).json({ mangas });
 };
 
-export { getUsersMangas, get, getAll };
+const getChapter = async (req, res) => {
+  const { mangaId, chapterId } = req.params;
+  try {
+    const chapter = await mangasService.getChapterById(mangaId, chapterId);
+    if (!chapter) {
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ msg: "Chapitre non trouvé" });
+    }
+    res.status(StatusCodes.OK).json({ chapter });
+  } catch (error) {
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ msg: "Erreur serveur" });
+  }
+};
+
+export { getUsersMangas, get, getAll, getChapter };

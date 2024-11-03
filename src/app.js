@@ -21,6 +21,8 @@ import connectDB from "./config/db.config.js";
 import auth from "./controllers/auth/auth.route.js";
 import mangas from "./controllers/mangas/route.manga.js";
 import adminRoutes from "./controllers/admin/route.admin.js";
+import user from "./controllers/user/route.user.js";
+import genres from "./controllers/genres/route.genre.js";
 
 const swaggerDocument = YAML.load("./swagger.yaml");
 const app = express();
@@ -32,6 +34,7 @@ cloudinary.config({
 });
 
 app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 app.use(helmet());
@@ -63,8 +66,11 @@ app.use(
   authorizeRoles("admin"),
   adminRoutes
 );
+
+app.use("/api/v1/users", user);
 app.use("/api/v1/auth", auth);
 app.use("/api/v1/mangas", authenticateUser, mangas);
+app.use("/api/v1/genres", genres);
 
 // Middleware de gestion des erreurs
 app.use(notFound);

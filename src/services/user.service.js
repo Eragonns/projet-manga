@@ -8,4 +8,12 @@ const get = (options) => {
   return User.findOne(options);
 };
 
-export { create, get };
+const getUserById = async (userId) => {
+  return await User.findById(userId);
+};
+
+const updateUser = async (userId, data) => {
+  return await User.findByIdAndUpdate(userId, data, { new: true });
+};
+
+export { create, get, getUserById, updateUser };

@@ -119,7 +119,7 @@ const addChapter = async (req, res, next) => {
     const manga = await mangasService.get(id);
     if (!manga) throw new NotFoundError(`Aucun manga trouvé avec l'ID ${id}`);
 
-    const slugTitle = slugify(manga.title, { lower: true, strict: true });
+    // const slugTitle = slugify(manga.title, { lower: true, strict: true });
     const folderName = manga.chapters[0].folderName.split("/chapitre_")[0];
 
     const chapterNumber = manga.chapters.length + 1;
@@ -209,35 +209,6 @@ const update = async (req, res, next) => {
       );
       updatedData.coverImage = coverResponse.secure_url;
     }
-
-    // if (req.files && req.files.chapterImages) {
-    //   const chapterFiles = req.files.chapterImages;
-    //   const chapterNumber = manga.chapters.length + 1;
-
-    //   const folderName = `mangas/${slugify(updatedData.title, {
-    //     lower: true,
-    //     strict: true
-    //   })}_${Date.now()}/chapitre_${chapterNumber}_${slugify(
-    //     chapterTitle || `Chapitre ${chapterNumber}`,
-    //     { lower: true, strict: true }
-    //   )}`;
-
-    //   const images = [];
-    //   for (const file of chapterFiles) {
-    //     const formattedImage = formatImage(file);
-    //     const response = await cloudinary.uploader.upload(formattedImage, {
-    //       folder: folderName
-    //     });
-    //     images.push(response.secure_url);
-    //   }
-
-    //   const newChapter = {
-    //     title: chapterTitle || `Chapitre ${chapterNumber}`,
-    //     images,
-    //     folderName
-    //   };
-    //   updatedData.chapters = [...manga.chapters, newChapter];
-    // }
 
     const updatedManga = await mangasService.update(id, updatedData);
 

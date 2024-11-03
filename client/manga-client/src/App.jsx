@@ -4,9 +4,9 @@ import SharedLayout from "./layouts/SharedLayout";
 
 import SingleError from "./components/SingleError";
 
-import { Admin, ErrorPage, Home, Login, Register } from "./pages";
+import { Admin, ErrorPage, Home, Login, Register, Profil } from "./pages";
 
-import ProtectedRoute from "./components/ProtectedRoute";
+import { ProtectedRoute, MangaPage, ChapterPage } from "./components";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +26,18 @@ const router = createBrowserRouter([
       {
         path: "register",
         element: <Register />
+      },
+      {
+        path: "profile",
+        element: <Profil />
+      },
+      {
+        path: "/manga/:mangaId",
+        element: <MangaPage />
+      },
+      {
+        path: "/manga/:mangaId/chapter/:chapterId",
+        element: <ChapterPage />
       },
       {
         path: "admin",
