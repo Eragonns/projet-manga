@@ -13,10 +13,12 @@ function SharedLayout() {
     );
   }
   return (
-    <main>
+    <div className="page_container">
       <Navbar />
-      <Outlet />
-    </main>
+      <main className="main">
+        <Outlet />
+      </main>
+    </div>
   );
 }
 

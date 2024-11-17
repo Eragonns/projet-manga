@@ -1,7 +1,13 @@
 .chapterPage_container {
   position: relative;
   top: 6.5em;
-  background-color: $black;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+}
+.chapterPage_select {
+  width: 50%;
+  margin-inline: auto;
 }
 
 .chapterPage_btns {
@@ -9,6 +15,7 @@
   flex-flow: row nowrap;
   justify-content: center;
   gap: 0.5em;
+  background-color: $black;
 }
 
 .chapterPage_btn {
@@ -17,7 +24,7 @@
   display: flex;
   align-items: center;
   gap: 0.5em;
-  background-color: $white;
+  //   background-color: $white;
   color: $black;
   padding: 0.5em;
   margin-block: 1em;
@@ -61,6 +68,7 @@
   height: auto;
   padding: 0;
   margin-inline: 2em;
+  background-color: $black;
 }
 .chapterPage_imagesContainer {
   margin-inline: 1.5em;

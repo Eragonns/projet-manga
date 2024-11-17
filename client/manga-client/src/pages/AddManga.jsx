@@ -32,13 +32,15 @@ const AddMangaPage = () => {
     for (let i = 0; i < formData.images.length; i++) {
       data.append("mangas", formData.images[i]);
     }
+    console.log(data);
 
     try {
       await axiosInstance.post("/admin/mangas", data, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data"
-        }
+        },
+        withCredentials: true
       });
       alert("Manga ajouté avec succès !");
 

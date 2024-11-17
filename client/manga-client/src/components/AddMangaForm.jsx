@@ -100,6 +100,18 @@ const AddMangaForm = ({ fetchMangas, token }) => {
         text: "Une erreur s'est produite, veuillez réessayer.",
         confirmButtonText: "OK"
       });
+      setFormData({
+        title: "",
+        author: "",
+        genre: [],
+        description: "",
+        status: "En Cours",
+        coverImage: "",
+        images: [],
+        chapterTitle: ""
+      });
+      if (coverImageRef.current) coverImageRef.current.value = null;
+      if (imagesRef.current) imagesRef.current.value = null;
       setIsSubmitting(false);
     }
   };

@@ -2,6 +2,8 @@ import { UnauthenticatedError } from "../errors/index.js";
 import { verifyJWT } from "../utils/token.util.js";
 
 const authenticateUser = (req, _res, next) => {
+  if (req.method === "OPTIONS") return next();
+
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith("Bearer"))
     throw new UnauthenticatedError("Pas de token fourni");

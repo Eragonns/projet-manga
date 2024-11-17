@@ -21,7 +21,7 @@ function MangaPage() {
   if (!manga) return <div className="spinner"></div>;
 
   return (
-    <div>
+    <div className="mangaPage_container">
       <img src={manga.coverImage} alt={`Couverture de ${manga.title}`} />
       <h1>{manga.title}</h1>
       <p>{manga.description}</p>

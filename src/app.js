@@ -34,26 +34,25 @@ cloudinary.config({
 });
 
 app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
-
-app.use(helmet());
-app.set("trust proxy", 1);
-app.use(
-  rateLimit({
-    windowMs: 15 * 30 * 1000, // 15 minutes
-    max: 100, // Limite chaque IP à 100 requêtes par fenêtre
-    standardHeaders: true,
-    legacyHeaders: false
-  })
-);
-app.use(mongoSanitize());
 app.use(
   cors({
     origin: "http://localhost:5173",
     credentials: true
   })
 );
+app.use(helmet());
+app.set("trust proxy", 1);
+app.use(
+  rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 1000, // Limite chaque IP à 100 requêtes par fenêtre
+    standardHeaders: true,
+    legacyHeaders: false
+  })
+);
+app.use(mongoSanitize());
 
 connectDB();
 

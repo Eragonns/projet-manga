@@ -22,8 +22,8 @@ const upload = multer({
   }
 }).fields([
   { name: "coverImage", maxCount: 1 },
-  { name: "mangas", maxCount: 30 },
-  { name: "chapterImages", maxCount: 30 },
+  { name: "mangas", maxCount: 70 },
+  { name: "chapterImages", maxCount: 70 },
   { name: "profileImage", maxCount: 1 }
 ]);
 

@@ -59,6 +59,13 @@ function ChapterPage() {
     navigate(`/manga/${mangaId}`);
   };
 
+  const handleChapterSelect = (event) => {
+    const selectedChapterId = event.target.value;
+    if (selectedChapterId) {
+      navigate(`/manga/${mangaId}/chapter/${selectedChapterId}`);
+    }
+  };
+
   const scrollToTop = () => {
     const scrollStep = -window.scrollY / (500 / 15);
     const scrollInterval = setInterval(() => {
@@ -73,6 +80,21 @@ function ChapterPage() {
   return (
     <div className="chapterPage_container">
       <h1 className="chapterPage_title">{chapter.title}</h1>
+      <select
+        className="chapterPage_select"
+        onChange={handleChapterSelect}
+        value={chapterId}
+      >
+        {chapters.map((ch) => (
+          <option key={ch._id} value={ch._id}>
+            {ch.folderName
+              .split("/")
+              .pop()
+              .replace(/_/g, " ")
+              .replace(/-/g, " ")}
+          </option>
+        ))}
+      </select>
       <div className="chapterPage_btns">
         {prevChapter ? (
           <button onClick={handlePrevious} className="chapterPage_btn">

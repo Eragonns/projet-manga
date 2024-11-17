@@ -42,10 +42,10 @@ const createManga = async (req, res, next) => {
     const coverFile = req.files.coverImage[0];
     const mangaFiles = req.files.mangas || [];
 
-    const maxSize = 1024 * 1024;
+    const maxSize = 5 * 1024 * 1024;
 
     if (coverFile.size > maxSize)
-      throw new Error("L'image de couverture doit être inférieure à 1Mo");
+      throw new Error("L'image de couverture doit être inférieure à 5Mo");
 
     const formattedImage = formatImage(coverFile);
     const coverResponse = await cloudinary.uploader.upload(formattedImage, {
@@ -60,7 +60,7 @@ const createManga = async (req, res, next) => {
     const images = [];
     for (const file of mangaFiles) {
       if (file.size > maxSize)
-        throw new Error("Veuillez fournir une image de taille inferieur a 1Mo");
+        throw new Error("Veuillez fournir une image de taille inferieur a 5Mo");
 
       const formattedImage = formatImage(file);
       const response = await cloudinary.uploader.upload(formattedImage, {

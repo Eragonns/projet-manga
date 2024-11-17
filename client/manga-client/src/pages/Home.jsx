@@ -58,6 +58,8 @@ function Home() {
       {isDataLoaded && (
         <Carousel
           showThumbs={false}
+          showIndicators={false}
+          showStatus={false}
           infiniteLoop
           autoPlay
           interval={3000}
@@ -71,7 +73,7 @@ function Home() {
                 src={manga.coverImage}
                 alt={`Couverture de ${manga.title}`}
               />
-              <h2>{manga.title}</h2>
+              <h2 className="home_latestManga_carouselTitle">{manga.title}</h2>
             </div>
           ))}
         </Carousel>

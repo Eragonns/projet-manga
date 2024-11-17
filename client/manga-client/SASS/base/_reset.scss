@@ -14,6 +14,10 @@ ul {
   list-style-type: none;
 }
 
+a {
+  text-decoration: none;
+}
+
 .sr-only {
   position: absolute;
   left: -10000px;
@@ -21,4 +25,8 @@ ul {
   width: 1px;
   height: 1px;
   overflow: hidden;
+}
+
+.main {
+  background-color: $black;
 }
