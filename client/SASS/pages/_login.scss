@@ -1,0 +1,88 @@
+.login_container {
+  min-block-size: calc(100vh - 109.72px);
+  background: url("/pageDeConnexion_cleanup.jfif") no-repeat center/cover;
+  position: relative;
+}
+
+.login_title {
+  color: $white;
+  font-family: $font-title;
+  font-size: 2em;
+  position: absolute;
+  left: 50%;
+  top: 20%;
+  transform: translate(-50%, -50%);
+}
+
+.login_form {
+  display: grid;
+  justify-content: center;
+  justify-items: stretch;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  row-gap: 1em;
+}
+
+.login_input {
+  opacity: 0.6;
+  border-radius: 10px;
+  border: none;
+  inline-size: 15em;
+  block-size: 1.8em;
+  margin-block-end: 1em;
+  padding-inline-start: 1em;
+}
+
+.login_input::placeholder {
+  color: $red;
+  font-size: 1.3em;
+  padding-inline-start: 1.5em;
+}
+
+.login_input:focus {
+  outline-color: $red;
+  color: $red;
+}
+.login_input:hover {
+  opacity: 1;
+  color: $red;
+}
+
+.login_btn {
+  cursor: pointer;
+  color: $red;
+  font-family: $font-title;
+  font-size: 1.2em;
+  border-radius: 10px;
+  border: none;
+  block-size: 1.5em;
+  margin-bottom: 0.5em;
+}
+.login_btn:hover {
+  background-color: $red;
+  color: $white;
+}
+.login_registerLink {
+  font-family: $font-primary;
+  text-align: center;
+  font-size: 1em;
+  color: $white;
+  margin: 0;
+  position: absolute;
+  bottom: 12em;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.login_registerLink_link {
+  color: $red;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.login_registerLink_link:hover {
+  text-decoration: underline;
+  color: $shade_of_red;
+}

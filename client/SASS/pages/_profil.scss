@@ -1,0 +1,129 @@
+.profil_container {
+  color: $white;
+}
+
+.profil_title {
+  font-family: $font-mangaTitle;
+  font-size: 1.6em;
+  text-align: center;
+  padding: 0.5em 1em;
+  margin-inline: auto;
+}
+
+.profil_form {
+  padding-inline: 1em;
+  text-align: center;
+}
+
+.profil_img {
+  inline-size: 10em;
+  block-size: 10em;
+  border-radius: 100%;
+  margin-inline: auto;
+  margin-block: 1em;
+}
+.profil_form input {
+  outline: $black;
+  padding-inline-start: 0.5em;
+}
+.profil_form input[type="file"]::file-selector-button {
+  border: none;
+  border-radius: 8px;
+}
+.profil_form input[type="file"]::file-selector-button:hover {
+  cursor: pointer;
+  background-color: $shade_of_red;
+  color: $white;
+}
+#dropdown {
+  border: none;
+  border-radius: 8px;
+  padding: 0.3em;
+}
+#dropdown:hover {
+  cursor: pointer;
+  background-color: $shade_of_red;
+  color: $white;
+}
+.profil_info {
+  display: flex;
+  flex-direction: column;
+}
+
+.profil_input {
+  inline-size: 73%;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.4em;
+}
+
+.profil_dropdownMenu {
+  position: absolute;
+  background-color: $white;
+  color: $black;
+  border: 1px solid $shade_of_white;
+  width: 100%;
+  z-index: 1000;
+  max-height: 150px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.profil_dropdownItem {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+}
+
+.profil_dropdownItem input {
+  margin-right: 5px;
+}
+
+.profil_form_btn {
+  margin-block-start: 1em;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+}
+
+.profil_form_btn:hover {
+  background-color: $shade_of_red;
+  color: $white;
+}
+
+.profil_title2 {
+  margin-block: 1em;
+}
+
+.profil_input_changePassword {
+  inline-size: 80%;
+  text-align: center;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.3em;
+}
+.profil_input_changePassword input {
+  outline: $black;
+  padding-inline-start: 0.5em;
+}
+
+.profil_changePassword_btn {
+  margin-block-start: 1em;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  display: block;
+  margin-inline: auto;
+}
+
+.profil_changePassword_btn:hover {
+  background-color: $shade_of_red;
+  color: $white;
+}

@@ -1,0 +1,19 @@
+.admin_container {
+  background-color: $red;
+}
+.admin_title {
+  font-family: $font-title;
+  font-size: 2em;
+  text-align: center;
+  color: $white;
+  text-decoration: underline;
+  padding: 2em;
+}
+
+.admin_formTitle {
+  font-family: $font-title;
+  font-size: 2em;
+  text-align: center;
+  color: $white;
+  margin-block-end: 1em;
+}

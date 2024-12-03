@@ -1,0 +1,118 @@
+.home_title {
+  color: $white;
+  padding-block: 1em;
+  text-align: center;
+}
+
+.home_mangaList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+}
+.home_mangaList_img {
+  cursor: pointer;
+}
+
+.home_mangaList_img:hover {
+  transform: scale(1.05);
+}
+
+.home_mangaList_article {
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-between;
+  inline-size: 10em;
+  block-size: 20em;
+  margin-block-end: 0.5em;
+}
+
+.home_mangaList_chapters {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-flow: column nowrap;
+  flex-grow: 1;
+  inline-size: 100%;
+  row-gap: 0.5em;
+}
+
+.home_chapterLink {
+  background-color: rgba(231, 216, 216, 0.568);
+  color: $red;
+  border-radius: 8px;
+  padding-left: 0.5em;
+}
+
+.home_chapterLink:hover {
+  background-color: $white;
+  color: $black;
+}
+.home_chapterLink_span {
+  color: $black;
+  padding-inline-start: 2.5em;
+}
+
+.home_mangaList_title {
+  color: $white;
+  font-family: $font-mangaTitle;
+  font-size: 1em;
+  text-align: center;
+  max-height: 3em;
+  padding-block: 0.5em;
+  height: 5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.home_searchContainer {
+  margin-top: 1em;
+  text-align: center;
+}
+
+.home_searchInput {
+  padding: 0.5em;
+  border: none;
+  border-radius: 5px;
+  width: 80%;
+  font-size: 1em;
+  outline-color: $black;
+}
+
+.home_searchResults {
+  list-style: none;
+  padding-inline: 1em;
+}
+
+.home_searchResultItem {
+  padding: 0.5em;
+  background: $white;
+  border-radius: 2px;
+  margin: 0.2em 0;
+  cursor: pointer;
+}
+
+.home_searchResultItem:hover {
+  background: #e8e8e8;
+}
+
+.home_mangaList_btn {
+  cursor: pointer;
+  inline-size: 90%;
+  display: block;
+  margin-inline: auto;
+  margin-block-start: 1em;
+  background-color: rgba(231, 216, 216, 0.568);
+  color: $red;
+  padding: 0.5em;
+  border-radius: 7px;
+}
+
+.home_mangaList_btn:hover {
+  background-color: $white;
+  color: $black;
+}
