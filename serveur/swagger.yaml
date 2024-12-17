@@ -1,0 +1,262 @@
+openapi: 3.0.0
+info:
+  title: projet-manga
+  version: 1.0.0
+servers:
+  - url: http://localhost:5000/api/v1/
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+tags:
+  - name: auth
+  - name: manga
+  - name: manga > user
+  - name: manga > user > profile
+  - name: manga > admin
+paths:
+  /auth/register:
+    post:
+      tags:
+        - auth
+      summary: register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                pseudo: eragon
+                email: lec@gmail.com
+                password: secret
+                role: admin
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /auth/login:
+    post:
+      tags:
+        - auth
+      summary: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: lec@gmail.com
+                password: secret
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /users/profile:
+    get:
+      tags:
+        - manga > user > profile
+      summary: profile
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /users/profile/update:
+    put:
+      tags:
+        - manga > user > profile
+      summary: update profile
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                pseudo:
+                  type: string
+                  example: eragon
+                name:
+                  type: string
+                  example: nom
+                firstName:
+                  type: string
+                  example: prenom
+                email:
+                  type: string
+                  example: email@live.fr
+                description:
+                  type: string
+                  example: "desc desc desc desc desc desc desc desc "
+                age:
+                  type: integer
+                  example: "30"
+                genre:
+                  type: string
+                  example: Aventure
+                profileImage:
+                  type: string
+                  format: binary
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /users/profile/change-password:
+    put:
+      tags:
+        - manga > user > profile
+      summary: changePassword
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                oldPassword: Saphiraeragon59
+                newPassword: Saphiraeragon59.
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /mangas:
+    get:
+      tags:
+        - manga > user
+      summary: all manga
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /manga/675aa07ce46dec4830135a58:
+    get:
+      tags:
+        - manga > user
+      summary: single manga
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /admin/mangas:
+    post:
+      tags:
+        - manga > admin
+      summary: create manga
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: new
+                author:
+                  type: string
+                  example: Action
+                genre:
+                  type: string
+                  example: Action
+                status:
+                  type: string
+                  example: En Cours
+                manga:
+                  type: string
+                  format: binary
+                description:
+                  type: string
+                  example: "desc desc desc desc desc desc desc "
+                coverImage:
+                  type: string
+                  format: binary
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /admin/mangas/675aa412e46dec4830135a65/chapters:
+    post:
+      tags:
+        - manga > admin
+      summary: create chapters
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: test
+                chapterImages:
+                  type: string
+                  format: binary
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - manga > admin
+      summary: delete chapters
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /admin/mangas/66fea17c6b338556652f426d:
+    put:
+      tags:
+        - manga > admin
+      summary: update manga
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                title: gg
+                author: lui
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /admin/mangas/671100272b12ac1a6765afc7:
+    delete:
+      tags:
+        - manga > admin
+      summary: delete manga
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}

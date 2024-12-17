@@ -62,7 +62,6 @@ const updateProfile = async (req, res) => {
     if (currentUser.profileImage) {
       const publicId = currentUser.profileImage.split("/").pop().split(".")[0];
       await cloudinary.uploader.destroy(`profileImage/${publicId}`);
-      console.log(`Ancienne image supprimée: profileImage/${publicId}`);
     }
 
     if (req.files && req.files.profileImage) {

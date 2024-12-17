@@ -30,7 +30,8 @@ const app = express();
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.CLOUD_API_KEY,
-  api_secret: process.env.CLOUD_API_SECRET
+  api_secret: process.env.CLOUD_API_SECRET,
+  timeout: 300000
 });
 
 app.use(express.json());
@@ -38,8 +39,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(
   cors({
-    origin: "http://localhost:5173",
-    credentials: true
+    // origin: "http://localhost:5173",
+    // credentials: true
   })
 );
 app.use(helmet());
