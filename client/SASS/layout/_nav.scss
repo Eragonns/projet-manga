@@ -18,3 +18,43 @@
 .navbar_logo {
   block-size: 13vh;
 }
+.navbar_liens {
+  display: none;
+}
+
+@media screen and (min-width: 1000px) {
+  .navbar_title {
+    font-size: 4em;
+  }
+  .navbar_liens {
+    display: flex;
+    justify-content: space-around;
+    block-size: 13vh;
+    align-items: center;
+    gap: 1em;
+  }
+  .navbar_lien {
+    font-family: $font-primary;
+    color: $white;
+    text-decoration: none;
+    font-size: 2em;
+    transition: color 0.5s linear;
+  }
+  .navbar_lien:hover {
+    color: $red;
+  }
+  .navbar_links_logout {
+    color: $white;
+    background-color: transparent;
+    border: none;
+    font-size: 2em;
+    transition: color 0.7s linear;
+    cursor: pointer;
+  }
+  .navbar_links_logout:hover {
+    color: $black;
+    background-color: $white;
+    border-radius: 10px;
+    width: 6em;
+  }
+}

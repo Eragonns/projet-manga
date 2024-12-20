@@ -24,7 +24,6 @@ function MangaPage() {
   const toggleDescription = () => {
     setIsExpanded(!isExpanded);
   };
-  console.log("eee", manga);
 
   const truncatedDescription =
     manga.description.length > descriptionLimit && !isExpanded

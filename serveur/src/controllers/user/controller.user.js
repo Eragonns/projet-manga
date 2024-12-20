@@ -7,7 +7,6 @@ import { v2 as cloudinary } from "cloudinary";
 
 const getProfile = async (req, res) => {
   try {
-    console.log("User ID:", req.user.userId);
     const user = await userService.getUserById(req.user.userId);
     if (!user) {
       return res

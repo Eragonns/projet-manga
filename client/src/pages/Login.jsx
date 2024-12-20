@@ -21,8 +21,6 @@ const Login = () => {
 
   useEffect(() => {
     if (user) {
-      console.log("redirection en fonction du role: ", user.role);
-
       if (user.role === "admin") {
         navigate("/admin");
       } else {

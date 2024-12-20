@@ -104,3 +104,9 @@
   color: $white;
   text-decoration: none;
 }
+
+@media screen and (min-width: 1000px) {
+  .burgerBtn_menu {
+    display: none;
+  }
+}

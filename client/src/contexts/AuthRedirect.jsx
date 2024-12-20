@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 
 const AuthRedirect = () => {
   const { user } = useContext(AuthContext);
-
   if (!user) {
     return <Navigate to="/register" replace />;
   }
@@ -17,7 +16,6 @@ function RoleRedirect({ disallowedRole, redirectTo, children }) {
   const { user } = useContext(AuthContext);
 
   if (user?.role === disallowedRole) {
-    console.log(`Redirecting to ${redirectTo}`);
     return <Navigate to={redirectTo} />;
   }
 

@@ -8,3 +8,5 @@ export { default as MangaPage } from "./MangaPage.jsx";
 export { default as Navbar } from "./Navbar.jsx";
 export { default as ProtectedRoute } from "./ProtectedRoute.jsx";
 export { default as SingleError } from "./SingleError.jsx";
+export { default as AddChapter } from "./AddChapter.jsx";
+export { default as AddManga } from "./AddManga.jsx";

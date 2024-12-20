@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import axiosInstance from "../utils/axiosInstance";
 import { AuthContext } from "../contexts/AuthContext";
-import AddMangaForm from "../components/AddMangaForm";
+import AddMangaForm from "./AddMangaForm";
 
 const AddMangaPage = () => {
   const { token } = useContext(AuthContext);

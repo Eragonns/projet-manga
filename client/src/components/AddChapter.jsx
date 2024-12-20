@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import axiosInstance from "../utils/axiosInstance";
 import { AuthContext } from "../contexts/AuthContext";
-import AddChapterForm from "../components/AddChapterForm";
+import AddChapterForm from "./AddChapterForm";
 
 const AddChapterPage = () => {
   const { token } = useContext(AuthContext);

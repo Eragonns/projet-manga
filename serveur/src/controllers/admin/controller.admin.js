@@ -14,11 +14,8 @@ import { StatusCodes } from "http-status-codes";
 
 const createManga = async (req, res, next) => {
   try {
-    console.log("Données reçues :", req.body);
-    console.log("Fichiers reçus :", req.files);
     const { title, author, genre, description, status, chapterTitle } =
       req.body;
-    console.log("Titre du chapitre reçu :", title);
     if (!title)
       throw new Error(
         "Le titre est requis et doit être une chaîne de caractères."
