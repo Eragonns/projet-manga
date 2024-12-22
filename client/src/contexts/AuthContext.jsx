@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
-import axiosInstance from "../utils/axiosInstance.js";
+// import axiosInstance from "../utils/axiosInstance.js";
+import axiosRender from "../utils/axiosRender.js";
 import PropTypes from "prop-types";
 
 export const AuthContext = createContext();
@@ -21,7 +22,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await axiosInstance.post("/auth/login", {
+      const response = await axiosRender.post("/auth/login", {
         email,
         password
       });
@@ -38,7 +39,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (pseudo, email, password) => {
     try {
-      const response = await axiosInstance.post("/auth/register", {
+      const response = await axiosRender.post("/auth/register", {
         pseudo,
         email,
         password
