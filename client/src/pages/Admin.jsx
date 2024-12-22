@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
-import axiosInstance from "../utils/axiosInstance";
+// import axiosInstance from "../utils/axiosInstance";
+import axiosRender from "../utils/axiosRender";
 import { AuthContext } from "../contexts/AuthContext";
 import AddMangaForm from "../components/AddMangaForm";
 import AddChapterForm from "../components/AddChapterForm";
@@ -19,7 +20,7 @@ const Admin = () => {
 
   const fetchMangas = async () => {
     try {
-      const response = await axiosInstance.get("/admin/mangas", {
+      const response = await axiosRender.get("/admin/mangas", {
         headers: { Authorization: `Bearer ${token}` }
       });
       setMangas(response.data.mangas);
@@ -30,7 +31,7 @@ const Admin = () => {
   };
   const handleUpdateManga = async (updateData) => {
     try {
-      await axiosInstance.put(
+      await axiosRender.put(
         `/admin/mangas/${updateData.get("_id")}`,
         updateData,
         {

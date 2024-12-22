@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import axiosInstance from "../utils/axiosInstance";
+// import axiosInstance from "../utils/axiosInstance";
+import axiosRender from "../utils/axiosRender";
 
 function MangaPage() {
   const { mangaId } = useParams();
@@ -9,7 +10,7 @@ function MangaPage() {
   const descriptionLimit = 200;
 
   useEffect(() => {
-    axiosInstance
+    axiosRender
       .get(`/mangas/${mangaId}`)
       .then((response) => {
         setManga(response.data.manga);

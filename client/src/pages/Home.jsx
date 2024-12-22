@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import axiosInstance from "../utils/axiosInstance";
+// import axiosInstance from "../utils/axiosInstance";
+import axiosRender from "../utils/axiosRender";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
@@ -17,7 +18,7 @@ function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axiosInstance
+    axiosRender
       .get("/mangas")
       .then((response) => {
         const sortedMangas = response.data.mangas.sort(
@@ -31,7 +32,7 @@ function Home() {
         console.error("Erreur lors du chargement des mangas:", error);
       });
 
-    axiosInstance
+    axiosRender
       .get("/manga/popular")
       .then((response) => {
         console.log("mangas populaire", response.data.mangas);
@@ -52,7 +53,7 @@ function Home() {
 
   const incrementReads = async (mangaId) => {
     try {
-      const response = await axiosInstance.post(
+      const response = await axiosRender.post(
         `/manga/${mangaId}/increment-reads`
       );
       console.log("read increment: ", response.data);

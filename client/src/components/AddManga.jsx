@@ -1,5 +1,7 @@
 import { useContext, useState } from "react";
-import axiosInstance from "../utils/axiosInstance";
+// import axiosInstance from "../utils/axiosInstance";
+import axiosRender from "../utils/axiosRender";
+
 import { AuthContext } from "../contexts/AuthContext";
 import AddMangaForm from "./AddMangaForm";
 
@@ -35,7 +37,7 @@ const AddMangaPage = () => {
     console.log(data);
 
     try {
-      await axiosInstance.post("/admin/mangas", data, {
+      await axiosRender.post("/admin/mangas", data, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data"

@@ -1,5 +1,6 @@
 import { useEffect, useState, useContext } from "react";
-import axiosInstance from "../utils/axiosInstance.js";
+// import axiosInstance from "../utils/axiosInstance.js";
+import axiosRender from "../utils/axiosRender.js";
 import { MANGA_GENRES } from "../../../serveur/src/utils/constants.util.js";
 import { nanoid } from "nanoid";
 import { AuthContext } from "../contexts/AuthContext.jsx";
@@ -30,7 +31,7 @@ const UserProfile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axiosInstance.get("/users/profile");
+        const response = await axiosRender.get("/users/profile");
         const profileData = response.data.user;
         setFormData({
           pseudo: profileData.pseudo,
@@ -90,15 +91,11 @@ const UserProfile = () => {
         }
       });
       try {
-        const response = await axiosInstance.put(
-          "/users/profile/update",
-          data,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data"
-            }
+        const response = await axiosRender.put("/users/profile/update", data, {
+          headers: {
+            "Content-Type": "multipart/form-data"
           }
-        );
+        });
         await Swal.fire("Modifié", "Profil mis à jour avec succès", "success");
         setUser(response.data.user);
         console.log("Profil mis à jour avec succès:", response.data);
@@ -120,7 +117,7 @@ const UserProfile = () => {
     if (confirmed) {
       setIsSubmit(true);
       try {
-        await axiosInstance.put("/users/profile/change-password", {
+        await axiosRender.put("/users/profile/change-password", {
           oldPassword,
           newPassword
         });

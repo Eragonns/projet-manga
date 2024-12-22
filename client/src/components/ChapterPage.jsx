@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axiosInstance from "../utils/axiosInstance";
+// import axiosInstance from "../utils/axiosInstance";
 import {
   FaArrowCircleRight,
   FaArrowCircleLeft,
   FaArrowCircleUp
 } from "react-icons/fa";
 import { GoInfo } from "react-icons/go";
+import axiosRender from "../utils/axiosRender";
 
 function ChapterPage() {
   const { mangaId, chapterId } = useParams();
@@ -15,7 +16,7 @@ function ChapterPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axiosInstance
+    axiosRender
       .get(`/mangas/${mangaId}`)
       .then((response) => {
         setChapters(response.data.manga.chapters);
@@ -26,7 +27,7 @@ function ChapterPage() {
   }, [mangaId]);
 
   useEffect(() => {
-    axiosInstance
+    axiosRender
       .get(`/mangas/${mangaId}/chapters/${chapterId}`)
       .then((response) => {
         setChapter(response.data.chapter);

@@ -2,7 +2,9 @@ import { useRef, useState } from "react";
 import { nanoid } from "nanoid";
 import PropTypes from "prop-types";
 
-import axiosInstance from "../utils/axiosInstance.js";
+// import axiosInstance from "../utils/axiosInstance.js";
+import axiosRender from "../utils/axiosRender";
+
 import Swal from "sweetalert2";
 import { MANGA_GENRES } from "../../../serveur/src/utils/constants.util.js";
 
@@ -65,7 +67,7 @@ const AddMangaForm = ({ fetchMangas, token }) => {
     }
     data.append("chapterTitle", formData.chapterTitle);
     try {
-      await axiosInstance.post("/admin/mangas", data, {
+      await axiosRender.post("/admin/mangas", data, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data"

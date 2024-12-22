@@ -1,5 +1,6 @@
 import { useState, useContext, useEffect } from "react";
-import axiosInstance from "../utils/axiosInstance";
+// import axiosInstance from "../utils/axiosInstance";
+import axiosRender from "../utils/axiosRender";
 import { AuthContext } from "../contexts/AuthContext";
 import AddChapterForm from "./AddChapterForm";
 
@@ -18,7 +19,7 @@ const AddChapterPage = () => {
 
   const fetchMangas = async () => {
     try {
-      const response = await axiosInstance.get("/admin/mangas", {
+      const response = await axiosRender.get("/admin/mangas", {
         headers: { Authorization: `Bearer ${token}` }
       });
       setMangas(response.data.mangas);
@@ -39,7 +40,7 @@ const AddChapterPage = () => {
     }
 
     try {
-      await axiosInstance.post(
+      await axiosRender.post(
         `/admin/mangas/${chapterData.mangaId}/chapters`,
         data,
         {

@@ -1,5 +1,6 @@
 import { useEffect, useContext, useState } from "react";
-import axiosInstance from "../utils/axiosInstance.js";
+// import axiosInstance from "../utils/axiosInstance.js";
+import axiosRender from "../utils/axiosRender";
 import { AuthContext } from "../contexts/AuthContext.jsx";
 import { dialogBox } from "../utils/dialogBox.js";
 import Swal from "sweetalert2";
@@ -14,7 +15,7 @@ const MangaListPage = ({ fetchMangas }) => {
   useEffect(() => {
     const loadMangas = async () => {
       try {
-        const response = await axiosInstance.get("/admin/mangas", {
+        const response = await axiosRender.get("/admin/mangas", {
           headers: { Authorization: `Bearer ${token}` }
         });
         setMangas(response.data.mangas);
@@ -42,7 +43,7 @@ const MangaListPage = ({ fetchMangas }) => {
     );
     if (confirmed) {
       try {
-        await axiosInstance.delete(`/admin/mangas/${id}`, {
+        await axiosRender.delete(`/admin/mangas/${id}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setMangas((prevMangas) =>
@@ -69,7 +70,7 @@ const MangaListPage = ({ fetchMangas }) => {
     );
     if (confirmed) {
       try {
-        await axiosInstance.delete(
+        await axiosRender.delete(
           `/admin/mangas/${mangaId}/chapters/${chapterId}`
         ),
           {
