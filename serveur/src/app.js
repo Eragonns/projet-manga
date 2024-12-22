@@ -7,6 +7,7 @@ import helmet from "helmet";
 import { rateLimit } from "express-rate-limit";
 import mongoSanitize from "express-mongo-sanitize";
 import cors from "cors";
+import { corsOptionsDelegate } from "./utils/cors.util.js";
 
 import swaggerUI from "swagger-ui-express";
 import YAML from "yamljs";
@@ -39,8 +40,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(
   cors({
-    // origin: "http://localhost:5173",
-    // credentials: true
+    origin: corsOptionsDelegate,
+    credentials: true
   })
 );
 app.use(helmet());
