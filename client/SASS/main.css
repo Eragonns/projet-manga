@@ -1,0 +1,1316 @@
+/*abstract*/
+/*base*/
+@import url("https://fonts.googleapis.com/css2?family=Bangers&family=Mukta:wght@200;300;400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+img {
+  display: block;
+  inline-size: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.sr-only {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.main {
+  background-color: #000000;
+}
+
+/*conponements*/
+.addChapter_formulaire {
+  display: flex;
+  flex-flow: column nowrap;
+  background-color: #ffffff;
+  inline-size: 90%;
+  max-width: 350px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border: 1px solid #f4f4f4;
+}
+
+.addChapter_formulaire div {
+  margin-bottom: 15px;
+}
+
+.addChapter_label {
+  font-size: 17px;
+  font-weight: 600;
+  color: #9f9f9f;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.addChapter_input,
+.addChapter_select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #e3e3e3;
+  border-radius: 5px;
+  background-color: #f4f4f4;
+  transition: border-color 0.3s ease;
+}
+
+.addChapter_input:focus,
+.addChapter_select:focus {
+  border-color: #900d09;
+  outline: none;
+}
+
+.addChapter_btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #900d09;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.addChapter_btn:hover {
+  background-color: #cf2b1f;
+}
+
+.addChapter_file {
+  background-color: #f4f4f4;
+  color: #900d09;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.addChapter_file::file-selector-button {
+  background-color: #900d09;
+  color: #ffffff;
+  border: none;
+  padding: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.addChapter_file::file-selector-button:hover {
+  background-color: #cf2b1f;
+}
+
+.addManga_formulaire {
+  background-color: #ffffff;
+  inline-size: 90%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ffffff;
+}
+
+.addManga_formulaire div {
+  margin-bottom: 15px;
+}
+
+.addManga_label {
+  font-size: 17px;
+  font-weight: 600;
+  color: #555;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.addManga_input,
+.addManga_select,
+textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #f4f4f4;
+  border-radius: 5px;
+  background-color: #ffffff;
+  transition: border-color 0.3s ease;
+}
+
+.addManga_input:focus,
+.addManga_select:focus,
+textarea:focus {
+  border-color: #900d09;
+  outline: none;
+}
+
+.addManga_textarea {
+  resize: vertical;
+  min-height: 100px;
+  max-inline-size: 100%;
+}
+
+.addManga_btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #900d09;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.addManga_btn:hover {
+  background-color: #cf2b1f;
+}
+
+.addManga_file {
+  background-color: #f4f4f4;
+  color: #900d09;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.addManga_file::file-selector-button {
+  background-color: #900d09;
+  color: #ffffff;
+  border: none;
+  padding: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.addManga_file::file-selector-button:hover {
+  background-color: #cf2b1f;
+}
+
+.addManga_dropdownContainer {
+  position: relative;
+  color: #000000;
+}
+
+.addManga_dropdownBtn {
+  padding: 10px;
+  border: 1px solid #f4f4f4;
+  cursor: pointer;
+}
+
+.addManga_dropdownBtn:hover {
+  background-color: #900d09;
+  color: #ffffff;
+}
+
+.addManga_dropdownMenu {
+  position: absolute;
+  background-color: #ffffff;
+  border: 1px solid #f4f4f4;
+  width: 100%;
+  z-index: 1000;
+  max-height: 150px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.addManga_dropdownItem {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+}
+
+.addManga_dropdownItem input {
+  margin-right: 5px;
+}
+
+.burgerBtn_menu {
+  position: relative;
+}
+
+.burgerBtn_icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  z-index: 1000;
+  color: #ffffff;
+}
+
+.burgerBtn_reactIcon {
+  font-size: 2.5em;
+}
+
+.burgerBtn_links {
+  font-family: "Mukta", sans-serif;
+  position: fixed;
+  top: 0;
+  left: -500px;
+  width: 100%;
+  height: 100vh;
+  background-color: #000000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: left 0.3s linear;
+  z-index: 999;
+}
+
+.burgerBtn_links.open {
+  left: 0;
+}
+
+.burgerBtn_links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.burgerBtn_links ul li {
+  margin: 20px 0;
+}
+
+.burgerBtn_links ul li a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1.5rem;
+  transition: color 0.5s linear;
+}
+
+.burgerBtn_links ul li a:hover {
+  color: #900d09;
+}
+
+.burgerBtn_title {
+  font-family: "Bangers", cursive;
+  color: #900d09;
+  position: absolute;
+  top: 5em;
+  font-size: 3em;
+}
+
+.burgerBtn_close_icon {
+  color: #ffffff;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  font-size: 1.3em;
+  cursor: pointer;
+}
+
+.burgerBtn_links_logout {
+  color: #ffffff;
+  background-color: transparent;
+  border: none;
+  font-size: 1.3em;
+  transition: color 0.7s linear;
+  cursor: pointer;
+}
+
+.burgerBtn_links_logout:hover {
+  color: #000000;
+  background-color: #ffffff;
+  border-radius: 10px;
+  width: 10em;
+}
+
+.burgerBtn_container {
+  display: flex;
+  justify-content: center;
+}
+
+.burgerBtn_liens {
+  list-style-type: none;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+.burgerBtn_lien {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+@media screen and (min-width: 1000px) {
+  .burgerBtn_menu {
+    display: none;
+  }
+}
+.admin_carousel {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 1.5em;
+  height: 100%;
+}
+
+.admin_carousel_title {
+  font-family: "Mukta", sans-serif;
+  font-size: 1.5em;
+  padding: 0.5em;
+}
+
+.home_carousel {
+  position: relative;
+  scroll-snap-type: x mandatory;
+}
+
+.home_carousel div {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home_carousel img {
+  width: auto;
+  height: 100%;
+  aspect-ratio: 16/20;
+  scroll-snap-align: center;
+  cursor: pointer;
+  pointer-events: auto;
+  filter: brightness(0.7);
+}
+
+.home_carousel img:hover {
+  filter: brightness(1);
+}
+
+.carousel .slide {
+  text-align: left;
+}
+
+.home_carouselTitle {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-family: "Bangers", cursive;
+  color: #ffffff;
+  padding: 0.5em;
+  font-size: 1.2em;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.editManga_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  inline-size: 90%;
+  padding: 2em;
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.editManga_select {
+  width: 90%;
+  padding: 0.5em;
+  font-size: 1em;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  margin-bottom: 1em;
+  background-color: #f4f4f4;
+  cursor: pointer;
+}
+
+.editManga_select:focus {
+  outline: none;
+  border-color: #e3e3e3;
+}
+
+.editManga_input,
+.editManga_textarea {
+  padding: 0.75em;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  margin-block: 0.5em;
+  font-size: 1em;
+  width: 100%;
+  background-color: #f4f4f4;
+}
+
+.editManga_input:focus,
+.editManga_textarea:focus {
+  outline: none;
+  border-color: #900d09;
+}
+
+.editManga_textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.editManga_label {
+  font-size: 17px;
+  color: #9f9f9f;
+  margin-top: 1em;
+}
+
+.editManga_inputFile {
+  margin-top: 0.5em;
+  background-color: #f4f4f4;
+  color: #900d09;
+}
+
+.editManga_inputFile::file-selector-button {
+  background-color: #900d09;
+  color: #ffffff;
+  border: none;
+  padding: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.editManga_inputFile::file-selector-button:hover {
+  background-color: #cf2b1f;
+}
+
+.editManga_btnSubmit {
+  background-color: #900d09;
+  color: #ffffff;
+  padding: 0.75em;
+  margin: 1em;
+  font-size: 1em;
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.editManga_btnSubmit:hover {
+  background-color: #cf2b1f;
+}
+
+.editManga_btnButton {
+  background-color: #e3e3e3;
+  color: #ffffff;
+  padding: 0.75em;
+  font-size: 1em;
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.editManga_btnButton:hover {
+  background-color: #cf2b1f;
+  color: #ffffff;
+}
+
+.spinner {
+  position: relative;
+  width: 28.8px;
+  height: 28.8px;
+}
+
+.spinner::before,
+.spinner::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  display: block;
+  animation: spinner-b4c8mmlg 0.5s backwards, spinner-49opz7lg 1.25s 0.5s infinite ease;
+  border: 7.2px solid #e70c0c;
+  border-radius: 50%;
+  box-shadow: 0 -43.2px 0 -7.2px #e70c0c;
+  position: absolute;
+  top: 25em;
+  left: 11em;
+}
+
+.spinner::after {
+  animation-delay: 0s, 1.25s;
+}
+
+@keyframes spinner-b4c8mmlg {
+  from {
+    box-shadow: 0 0 0 -7.2px #e70c0c;
+  }
+}
+@keyframes spinner-49opz7lg {
+  to {
+    transform: rotate(360deg);
+  }
+}
+/*layout*/
+.footer {
+  background-color: #000000;
+  color: #ffffff;
+  text-align: center;
+  padding: 2em 1em;
+}
+
+.navbar {
+  inline-size: 100%;
+  block-size: 13vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-inline-end: 0.5em;
+  background-color: #000000;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+}
+
+.navbar_title {
+  font-family: "Bangers", cursive;
+  font-size: 1.7em;
+  color: #900d09;
+}
+
+.navbar_logo {
+  block-size: 13vh;
+}
+
+.navbar_liens {
+  display: none;
+}
+
+@media screen and (min-width: 1000px) {
+  .navbar_title {
+    font-size: 4em;
+  }
+  .navbar_liens {
+    display: flex;
+    justify-content: space-around;
+    block-size: 13vh;
+    align-items: center;
+    gap: 1em;
+  }
+  .navbar_lien {
+    font-family: "Mukta", sans-serif;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 2em;
+    transition: color 0.5s linear;
+  }
+  .navbar_lien:hover {
+    color: #900d09;
+  }
+  .navbar_links_logout {
+    color: #ffffff;
+    background-color: transparent;
+    border: none;
+    font-size: 2em;
+    transition: color 0.7s linear;
+    cursor: pointer;
+  }
+  .navbar_links_logout:hover {
+    color: #000000;
+    background-color: #ffffff;
+    border-radius: 10px;
+    width: 6em;
+  }
+}
+.page_container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main {
+  padding-top: 13vh;
+  flex: 1;
+}
+
+/*pages*/
+.admin_container {
+  background-color: #900d09;
+}
+
+.admin_title {
+  font-family: "Bangers", cursive;
+  font-size: 2em;
+  text-align: center;
+  color: #ffffff;
+  text-decoration: underline;
+  padding: 2em;
+}
+
+.admin_formTitle {
+  font-family: "Bangers", cursive;
+  font-size: 2em;
+  text-align: center;
+  color: #ffffff;
+  margin-block-end: 1em;
+}
+
+.chapterPage_container {
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  padding-bottom: 1em;
+  background-color: #000000;
+}
+
+.chapterPage_select {
+  width: 50%;
+  margin-inline: auto;
+}
+
+.chapterPage_btns {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  gap: 0.5em;
+  background-color: #000000;
+}
+
+.chapterPage_btn {
+  font-family: "Bangers", cursive;
+  font-size: 1em;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  color: #000000;
+  padding: 0.5em;
+  margin-block: 1em;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.chapterPage_btn:hover {
+  background-color: #cf2b1f;
+  color: #ffffff;
+}
+
+.chapterPage_reactIcon {
+  font-size: 1.5em;
+}
+
+.chapterPage_btnToTop {
+  position: fixed;
+  bottom: 2px;
+  right: 3px;
+  background-color: #900d09;
+  color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  padding: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.chapterPage_btnToTop:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.chapterPage_title {
+  padding-block: 2em 0.5em;
+  text-align: center;
+  color: #ffffff;
+}
+
+.chapterPage_image {
+  height: auto;
+  padding: 0;
+  margin-inline: 2em;
+}
+
+.chapterPage_imagesContainer {
+  margin-inline: 1.5em;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+.errorPage_section {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.errorPage_titre {
+  text-align: center;
+  font-size: 3em;
+  font-family: "Josefin Sans", sans-serif;
+  padding-block-start: 0.5em;
+}
+
+.errorPage_btn {
+  display: block;
+  margin-inline: auto;
+  font-size: 1.5em;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+  margin-block-end: 1em;
+  width: 10em;
+}
+
+.errorPage_btn:hover {
+  background-color: #900d09;
+  color: #ffffff;
+}
+
+.errorPage_img {
+  block-size: 91vh;
+  inline-size: 90vw;
+  margin-inline: auto;
+}
+
+.home_title {
+  color: #ffffff;
+  padding-block: 1em;
+  text-align: center;
+}
+
+.home_mangaList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+}
+
+.home_mangaList_img {
+  cursor: pointer;
+}
+
+.home_mangaList_img:hover {
+  transform: scale(1.05);
+}
+
+.home_mangaList_article {
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-between;
+  inline-size: 10em;
+  block-size: 20em;
+  margin-block-end: 0.5em;
+}
+
+.home_mangaList_chapters {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-flow: column nowrap;
+  flex-grow: 1;
+  inline-size: 100%;
+  row-gap: 0.5em;
+}
+
+.home_chapterLink {
+  background-color: rgba(231, 216, 216, 0.568);
+  color: #900d09;
+  border-radius: 8px;
+  padding-left: 0.5em;
+}
+
+.home_chapterLink:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.home_chapterLink_span {
+  color: #000000;
+  padding-inline-start: 2.5em;
+}
+
+.home_mangaList_title {
+  color: #ffffff;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 1em;
+  text-align: center;
+  max-height: 3em;
+  padding-block: 0.5em;
+  height: 5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.home_searchContainer {
+  margin-top: 1em;
+  text-align: center;
+}
+
+.home_searchInput {
+  padding: 0.5em;
+  border: none;
+  border-radius: 5px;
+  width: 80%;
+  font-size: 1em;
+  outline-color: #000000;
+}
+
+.home_searchResults {
+  list-style: none;
+  padding-inline: 1em;
+}
+
+.home_searchResultItem {
+  padding: 0.5em;
+  background: #ffffff;
+  border-radius: 2px;
+  margin: 0.2em 0;
+  cursor: pointer;
+}
+
+.home_searchResultItem:hover {
+  background: #e8e8e8;
+}
+
+.home_mangaList_btn {
+  cursor: pointer;
+  inline-size: 90%;
+  display: block;
+  margin-inline: auto;
+  margin-block-start: 1em;
+  background-color: rgba(231, 216, 216, 0.568);
+  color: #900d09;
+  padding: 0.5em;
+  border-radius: 7px;
+}
+
+.home_mangaList_btn:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.login_container {
+  min-block-size: calc(100vh - 109.72px);
+  background: url("/pageDeConnexion_cleanup.jfif") no-repeat center/cover;
+  position: relative;
+}
+
+.login_title {
+  color: #ffffff;
+  font-family: "Bangers", cursive;
+  font-size: 2em;
+  position: absolute;
+  left: 50%;
+  top: 20%;
+  transform: translate(-50%, -50%);
+}
+
+.login_form {
+  display: grid;
+  justify-content: center;
+  justify-items: stretch;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  row-gap: 1em;
+}
+
+.login_input {
+  opacity: 0.6;
+  border-radius: 10px;
+  border: none;
+  inline-size: 15em;
+  block-size: 1.8em;
+  margin-block-end: 1em;
+  padding-inline-start: 1em;
+}
+
+.login_input::-moz-placeholder {
+  color: #900d09;
+  font-size: 1.3em;
+  padding-inline-start: 1.5em;
+}
+
+.login_input::placeholder {
+  color: #900d09;
+  font-size: 1.3em;
+  padding-inline-start: 1.5em;
+}
+
+.login_input:focus {
+  outline-color: #900d09;
+  color: #900d09;
+}
+
+.login_input:hover {
+  opacity: 1;
+  color: #900d09;
+}
+
+.login_btn {
+  cursor: pointer;
+  color: #900d09;
+  font-family: "Bangers", cursive;
+  font-size: 1.2em;
+  border-radius: 10px;
+  border: none;
+  block-size: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.login_btn:hover {
+  background-color: #900d09;
+  color: #ffffff;
+}
+
+.login_registerLink {
+  font-family: "Mukta", sans-serif;
+  text-align: center;
+  font-size: 1em;
+  color: #ffffff;
+  margin: 0;
+  position: absolute;
+  bottom: 12em;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.login_registerLink_link {
+  color: #900d09;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.login_registerLink_link:hover {
+  text-decoration: underline;
+  color: #cf2b1f;
+}
+
+.mangaPage_container {
+  color: #ffffff;
+}
+
+.mangaPage_status {
+  text-align: center;
+  padding-block-end: 0.5em;
+}
+
+.mangaPage_genres {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5em;
+  margin-block-end: 0.5em;
+}
+
+.mangaPage_genreItem {
+  padding: 0.3em 0.6em;
+  background-color: #ffffff;
+  color: #000000;
+  border-radius: 5px;
+  font-size: 1em;
+  white-space: nowrap;
+}
+
+.mangaPage_bloc {
+  padding-inline: 2em;
+}
+
+.mangaPage_title {
+  text-align: center;
+  padding-block: 1em 0.2em;
+  font-family: "Josefin Sans", sans-serif;
+}
+
+.mangaPage_text {
+  text-align: center;
+  font-family: "Mukta", sans-serif;
+  font-size: 1.1em;
+  line-height: 1.3;
+}
+
+.mangaPage_toggleBtn {
+  background-color: transparent;
+  border: none;
+  color: #cf2b1f;
+  cursor: pointer;
+  font-size: 1em;
+  padding: 1em;
+}
+
+.mangaPage_toggleBtn:hover {
+  text-decoration: underline;
+}
+
+.mangaPage_liens {
+  padding: 1em;
+  background-color: #191c23;
+  border-radius: 10px;
+  margin-block: 1em;
+}
+
+.mangaPage_lien {
+  color: #ffffff;
+  transition: color 0.5s linear;
+}
+
+.mangaPage_lien:hover {
+  color: #cf2b1f;
+}
+
+.profil_container {
+  color: #ffffff;
+}
+
+.profil_title {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 1.6em;
+  text-align: center;
+  padding: 0.5em 1em;
+  margin-inline: auto;
+}
+
+.profil_form {
+  padding-inline: 1em;
+  text-align: center;
+}
+
+.profil_img {
+  inline-size: 10em;
+  block-size: 10em;
+  border-radius: 100%;
+  margin-inline: auto;
+  margin-block: 1em;
+}
+
+.profil_form input {
+  outline: #000000;
+  padding-inline-start: 0.5em;
+}
+
+.profil_form input[type=file]::file-selector-button {
+  border: none;
+  border-radius: 8px;
+}
+
+.profil_form input[type=file]::file-selector-button:hover {
+  cursor: pointer;
+  background-color: #cf2b1f;
+  color: #ffffff;
+}
+
+#dropdown {
+  border: none;
+  border-radius: 8px;
+  padding: 0.3em;
+}
+
+#dropdown:hover {
+  cursor: pointer;
+  background-color: #cf2b1f;
+  color: #ffffff;
+}
+
+.profil_info {
+  display: flex;
+  flex-direction: column;
+}
+
+.profil_input {
+  inline-size: 73%;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.4em;
+}
+
+.profil_dropdownMenu {
+  position: absolute;
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #f4f4f4;
+  width: 100%;
+  z-index: 1000;
+  max-height: 150px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.profil_dropdownItem {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+}
+
+.profil_dropdownItem input {
+  margin-right: 5px;
+}
+
+.profil_form_btn {
+  margin-block-start: 1em;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+}
+
+.profil_form_btn:hover {
+  background-color: #cf2b1f;
+  color: #ffffff;
+}
+
+.profil_title2 {
+  margin-block: 1em;
+}
+
+.profil_input_changePassword {
+  inline-size: 80%;
+  text-align: center;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.3em;
+}
+
+.profil_input_changePassword input {
+  outline: #000000;
+  padding-inline-start: 0.5em;
+}
+
+.profil_changePassword_btn {
+  margin-block-start: 1em;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  display: block;
+  margin-inline: auto;
+}
+
+.profil_changePassword_btn:hover {
+  background-color: #cf2b1f;
+  color: #ffffff;
+}
+
+.register_container {
+  min-block-size: calc(100vh - 109.72px);
+  background: url("/pageDinscription.jfif") no-repeat center/cover;
+  position: relative;
+}
+
+.register_title {
+  color: #ffffff;
+  font-family: "Bangers", cursive;
+  font-size: 2em;
+  position: absolute;
+  left: 50%;
+  top: 20%;
+  transform: translate(-50%, -50%);
+}
+
+.register_form {
+  display: grid;
+  justify-content: center;
+  justify-items: stretch;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  row-gap: 1em;
+}
+
+.register_input {
+  opacity: 0.6;
+  border-radius: 10px;
+  border: none;
+  inline-size: 15em;
+  padding-inline-start: 1em;
+  block-size: 1.8em;
+  margin-block-end: 1em;
+}
+
+.register_input::-moz-placeholder {
+  color: #900d09;
+  font-size: 1.3em;
+  padding-inline-start: 1.5em;
+}
+
+.register_input::placeholder {
+  color: #900d09;
+  font-size: 1.3em;
+  padding-inline-start: 1.5em;
+}
+
+.register_input:focus {
+  outline-color: #900d09;
+  color: #900d09;
+}
+
+.register_input:hover {
+  opacity: 1;
+  color: #900d09;
+}
+
+.register_btn {
+  cursor: pointer;
+  color: #900d09;
+  font-family: "Bangers", cursive;
+  font-size: 1.2em;
+  border-radius: 10px;
+  border: none;
+  block-size: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.register_btn:hover {
+  background-color: #900d09;
+  color: #ffffff;
+}
+
+.register_loginLink {
+  font-family: "Mukta", sans-serif;
+  text-align: center;
+  font-size: 1em;
+  color: #ffffff;
+  margin: 0;
+  position: absolute;
+  bottom: 12em;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.register_loginLink_link {
+  color: #900d09;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.register_loginLink_link:hover {
+  text-decoration: underline;
+  color: #cf2b1f;
+}
+
+/*themes*/
+/*vendors*/
+.swal2-icon {
+  background-color: #900d09;
+}
+
+.swal2-icon-content {
+  color: #ffffff;
+}
+
+.swal2-warning {
+  background-color: #900d09;
+  border-color: #900d09 !important;
+}/*# sourceMappingURL=main.css.map */
