@@ -59,6 +59,11 @@ app.use(mongoSanitize());
 connectDB();
 
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+app.get("/", (_req, res) => {
+  res
+    .status(StatusCodes.OK)
+    .send("<h1>ScanMangaVerse</h1><a href='/api-docs'>Documentation</a>");
+});
 
 // Routes
 app.use(
