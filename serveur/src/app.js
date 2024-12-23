@@ -7,6 +7,7 @@ import helmet from "helmet";
 import { rateLimit } from "express-rate-limit";
 import mongoSanitize from "express-mongo-sanitize";
 import cors from "cors";
+import { StatusCodes } from "http-status-codes";
 import { corsOptionsDelegate } from "./utils/cors.util.js";
 
 import swaggerUI from "swagger-ui-express";
