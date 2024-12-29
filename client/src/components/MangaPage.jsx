@@ -33,7 +33,11 @@ function MangaPage() {
 
   return (
     <div className="mangaPage_container">
-      <img src={manga.coverImage} alt={`Couverture de ${manga.title}`} />
+      <img
+        src={manga.coverImage}
+        alt={`Couverture de ${manga.title}`}
+        className="mangaPage_img"
+      />
       <div className="mangaPage_bloc">
         <h1 className="mangaPage_title">{manga.title}</h1>
         <h2 className="mangaPage_status">{manga.status}</h2>
@@ -50,20 +54,22 @@ function MangaPage() {
             {isExpanded ? "Voir moins" : "Voir plus"}
           </button>
         )}
-
-        <h2>Chapitres:</h2>
-        <ul>
-          {manga.chapters.map((chapter) => (
-            <li key={chapter._id} className="mangaPage_liens">
+        <div className="mangaPage_chapters">
+          <h2 className="mangaPage_titleChapters">Chapitres:</h2>
+          <ul>
+            {manga.chapters.map((chapter) => (
               <Link
+                key={chapter._id}
                 to={`/manga/${mangaId}/chapter/${chapter._id}`}
                 className="mangaPage_lien"
               >
-                {chapter.title}
+                <li key={chapter._id} className="mangaPage_liens">
+                  {chapter.title}
+                </li>
               </Link>
-            </li>
-          ))}
-        </ul>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );

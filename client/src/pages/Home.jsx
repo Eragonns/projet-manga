@@ -1,9 +1,5 @@
-import { useEffect, useState } from "react";
-// import axiosInstance from "../utils/axiosInstance";
+import { useEffect, useState, useRef } from "react";
 import axiosRender from "../utils/axiosRender";
-
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from "react-responsive-carousel";
 import { Link, useNavigate } from "react-router-dom";
 
 function Home() {
@@ -14,6 +10,13 @@ function Home() {
   const [pageIndex, setPageIndex] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+
+  const latestCarouselRef = useRef(null);
+  const popularCarouselRef = useRef(null);
+  const latestIntervalRef = useRef(null);
+  const popularIntervalRef = useRef(null);
+  const [latestCurrentIndex, setLatestCurrentIndex] = useState(0);
+  const [popularCurrentIndex, setPopularCurrentIndex] = useState(0);
 
   const navigate = useNavigate();
 
@@ -35,8 +38,6 @@ function Home() {
     axiosRender
       .get("/manga/popular")
       .then((response) => {
-        console.log("mangas populaire", response.data.mangas);
-
         setPopularMangas(response.data.mangas.slice(0, 10));
       })
       .catch((error) => {
@@ -45,7 +46,66 @@ function Home() {
           error
         );
       });
-  }, []);
+
+    latestIntervalRef.current = setInterval(() => {
+      setLatestCurrentIndex(
+        (prevIndex) => (prevIndex + 1) % latestMangas.length
+      );
+    }, 3000);
+
+    popularIntervalRef.current = setInterval(() => {
+      setPopularCurrentIndex(
+        (prevIndex) => (prevIndex + 1) % popularMangas.length
+      );
+    }, 3000);
+
+    return () => {
+      clearInterval(latestIntervalRef.current);
+      clearInterval(popularIntervalRef.current);
+    };
+  }, [latestMangas.length, popularMangas.length]);
+
+  useEffect(() => {
+    if (latestCarouselRef.current) {
+      const totalItems = latestMangas.length + 4;
+      const transitionDuration = "1s";
+
+      if (latestCurrentIndex === totalItems - 4) {
+        // Transition à la première image
+        setTimeout(() => {
+          latestCarouselRef.current.style.transition = "none";
+          latestCarouselRef.current.style.transform = `translateX(0%)`;
+          setLatestCurrentIndex(0);
+        }, 500); // Correspond au temps de la transition CSS
+      } else {
+        latestCarouselRef.current.style.transition = `transform ${transitionDuration} ease-in-out`;
+        latestCarouselRef.current.style.transform = `translateX(-${
+          latestCurrentIndex * 100
+        }%)`;
+      }
+    }
+  }, [latestCurrentIndex, latestMangas.length]);
+
+  useEffect(() => {
+    if (popularCarouselRef.current) {
+      const totalItems = popularMangas.length + 4;
+      const transitionDuration = "2s";
+
+      if (popularCurrentIndex === totalItems - 4) {
+        // Transition à la première image
+        setTimeout(() => {
+          popularCarouselRef.current.style.transition = "none";
+          popularCarouselRef.current.style.transform = `translateX(0%)`;
+          setPopularCurrentIndex(0);
+        }, 500); // Correspond au temps de la transition CSS
+      } else {
+        popularCarouselRef.current.style.transition = `transform ${transitionDuration} ease-in-out`;
+        popularCarouselRef.current.style.transform = `translateX(-${
+          popularCurrentIndex * 100
+        }%)`;
+      }
+    }
+  }, [popularCurrentIndex, popularMangas.length]);
 
   const loadMoreMangas = () => {
     setPageIndex((prevIndex) => prevIndex + 1);
@@ -53,10 +113,7 @@ function Home() {
 
   const incrementReads = async (mangaId) => {
     try {
-      const response = await axiosRender.post(
-        `/manga/${mangaId}/increment-reads`
-      );
-      console.log("read increment: ", response.data);
+      await axiosRender.post(`/manga/${mangaId}/increment-reads`);
     } catch (error) {
       console.error("Erreur lors de l'incrémentation des lectures:", error);
     }
@@ -64,49 +121,65 @@ function Home() {
 
   const handleMangaClick = async (mangaId) => {
     await incrementReads(mangaId);
-    navigate(`manga/${mangaId}`);
+    navigate(`/manga/${mangaId}`);
   };
+
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
-
     if (e.target.value.trim() === "") {
       setSearchResults([]);
       return;
     }
-
     const filteredMangas = allMangas.filter((manga) =>
       manga.title.toLowerCase().includes(e.target.value.toLowerCase())
     );
-
     setSearchResults(filteredMangas);
   };
 
   return (
     <>
       {isDataLoaded && (
-        <Carousel
-          showThumbs={false}
-          showIndicators={false}
-          showStatus={false}
-          infiniteLoop
-          autoPlay
-          interval={3000}
-          transitionTime={600}
-          stopOnHover
-          className="home_carousel"
-        >
-          {latestMangas.map((manga) => (
-            <div key={manga._id}>
-              <img
-                className="home_carousel_img"
-                src={manga.coverImage}
-                alt={`Couverture de ${manga.title}`}
-                onClick={() => handleMangaClick(manga._id)}
-              />
-              <h2 className="home_carouselTitle">{manga.title}</h2>
-            </div>
-          ))}
-        </Carousel>
+        <div className="home_carousel_container">
+          <div className="home_carousel" ref={latestCarouselRef}>
+            {/* Clone du dernier élément */}
+            {latestMangas.map((manga, index) => (
+              <div key={`${manga._id}-${index}`} className="home_carousel_item">
+                <img
+                  className="home_carousel_img"
+                  src={manga.coverImage}
+                  alt={`Couverture de ${manga.title}`}
+                  onClick={() => handleMangaClick(manga._id)}
+                />
+                <h2 className="home_carouselTitle">{manga.title}</h2>
+              </div>
+            ))}
+
+            {/* Tous les éléments */}
+            {latestMangas.slice(0, 4).map((manga, index) => (
+              <div key={`clone-${index}`} className="home_carousel_item">
+                <img
+                  className="home_carousel_img"
+                  src={manga.coverImage}
+                  alt={`Couverture de ${manga.title}`}
+                  onClick={() => handleMangaClick(manga._id)}
+                />
+                <h2 className="home_carouselTitle">{manga.title}</h2>
+              </div>
+            ))}
+            {/* Clone du premier élément */}
+            {latestMangas.length > 0 && (
+              <div className="home_carousel_item">
+                <img
+                  className="home_carousel_img"
+                  src={latestMangas[0].coverImage}
+                  alt={`Couverture de ${latestMangas[0].title}`}
+                  onClick={() => handleMangaClick(latestMangas[0]._id)}
+                />
+                <h2 className="home_carouselTitle">{latestMangas[0].title}</h2>
+              </div>
+            )}
+          </div>
+        </div>
       )}
       <div className="home_searchContainer">
         <input
@@ -130,33 +203,33 @@ function Home() {
           ))}
         </ul>
       )}
-
       <h1 className="home_title">Mangas Populaires</h1>
-      {isDataLoaded && popularMangas.length > 0 && (
-        <Carousel
-          showThumbs={false}
-          showIndicators={false}
-          showStatus={false}
-          infiniteLoop
-          autoPlay
-          interval={3000}
-          transitionTime={600}
-          stopOnHover
-          className="home_carousel"
-        >
-          {popularMangas.map((manga) => (
-            <div key={manga._id}>
-              <img
-                src={manga.coverImage}
-                alt={`Image mangas populaires ${manga.title}`}
-                onClick={() => handleMangaClick(manga._id)}
-              />
-              <h2 className="home_carouselTitle">{manga.title}</h2>
-            </div>
-          ))}
-        </Carousel>
+      {isDataLoaded && (
+        <div className="home_carousel_container">
+          <div className="home_carousel" ref={popularCarouselRef}>
+            {popularMangas.map((manga) => (
+              <div key={manga._id} className="home_carousel_item">
+                <img
+                  src={manga.coverImage}
+                  alt={`Image mangas populaires ${manga.title}`}
+                  onClick={() => handleMangaClick(manga._id)}
+                />
+                <h2 className="home_carouselTitle">{manga.title}</h2>
+              </div>
+            ))}
+            {popularMangas.slice(0, 4).map((manga, index) => (
+              <div key={`clone-${index}`} className="home_carousel_item">
+                <img
+                  src={manga.coverImage}
+                  alt={`Image mangas populaires ${manga.title}`}
+                  onClick={() => handleMangaClick(manga._id)}
+                />
+                <h2 className="home_carouselTitle">{manga.title}</h2>
+              </div>
+            ))}
+          </div>
+        </div>
       )}
-
       <h1 className="home_title">Derniers Mangas Sortis</h1>
       <ul className="home_mangaList">
         {allMangas.slice(0, pageIndex * 24).map((manga) => (

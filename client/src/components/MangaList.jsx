@@ -112,50 +112,56 @@ const MangaListPage = ({ fetchMangas }) => {
   };
 
   return (
-    <div>
+    <div className="mangaList_container">
       <input
         type="text"
         placeholder="Rechercher un manga..."
+        className="mangaList_search"
         value={searchTerm}
         onChange={handleSearch}
-        style={{
-          width: "100%",
-          padding: "10px",
-          marginBottom: "20px",
-          fontSize: "16px"
-        }}
       />
-      <ul>
+      <ul className="mangaList_list">
         {filteredMangas.map((manga) => (
-          <li key={manga._id}>
-            <img src={manga.coverImage} alt={`Couverture de ${manga.title}`} />
-            <h4>{manga.title}</h4>
-            <p>
+          <li
+            key={manga._id}
+            className={`mangaList_item ${
+              manga.chapters.length > 2 ? "scrollable" : ""
+            }`}
+          >
+            <img
+              src={manga.coverImage}
+              alt={`Couverture de ${manga.title}`}
+              className="mangaList_img"
+            />
+            <h4 className="mangaList_itemTitle">{manga.title}</h4>
+            <p className="mangaList_author">
               <strong>Auteur: </strong>
               {manga.author}
             </p>
-            <p>
+            <p className="mangaList_genre">
               <strong>Genre: </strong>
               {manga.genre.join(", ")}
             </p>
-            <p>
+            <p className="mangaList_etat">
               <strong>État: </strong>
               {manga.status}
             </p>
             <button
+              className="mangaList_btn"
               onClick={() => {
                 handleDelete(manga._id);
               }}
             >
               Supprimer ce Manga
             </button>
-            <div>
+            <div className="mangaList_chapters">
               <strong>Chapitres:</strong>
               <ul>
                 {manga.chapters.map((chapter) => (
                   <li key={chapter._id}>
-                    <p>{chapter.title}</p>
+                    <p className="mangaList_titleChapter">{chapter.title}</p>
                     <button
+                      className="mangaList_btn"
                       onClick={() =>
                         handleDeleteChapter(manga._id, chapter._id)
                       }

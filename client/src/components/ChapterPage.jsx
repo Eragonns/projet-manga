@@ -77,7 +77,6 @@ function ChapterPage() {
       }
     }, 15);
   };
-  console.log("ccc", chapters);
 
   return (
     <div className="chapterPage_container">

@@ -1,0 +1,110 @@
+.mangaList_container input[type="text"] {
+  width: 80%;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.mangaList_list {
+  display: grid;
+  grid-template-columns: repeat(1, 13em);
+  justify-content: center;
+  grid-gap: 21px;
+  color: $white;
+  font-size: 1.4em;
+  max-height: 33em;
+  overflow: auto;
+}
+.mangaList_item {
+  background-color: $black;
+  border: 1px solid $white;
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 45em;
+  height: 100%;
+  overflow: hidden;
+}
+.mangaList_item.scrollable {
+  // max-height: 400px;
+  overflow-y: auto;
+}
+
+.mangaList_item.scrollable::-webkit-scrollbar {
+  width: 8px;
+}
+
+.mangaList_item.scrollable::-webkit-scrollbar-thumb {
+  background-color: $shade_of_red;
+  border-radius: 4px;
+}
+
+.mangaList_item.scrollable::-webkit-scrollbar-track {
+  background-color: $white;
+}
+
+.mangaList_img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: contain;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+.mangaList_btn {
+  background-color: $shade_of_red;
+  color: $white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.mangaList_btn:hover {
+  background-color: $red;
+}
+.mangaList_itemTitle {
+  display: block;
+  block-size: 3em;
+  padding-top: 0.5em;
+}
+.mangaList_genre {
+  display: block;
+  block-size: 6.2em;
+  padding-top: 0.5em;
+}
+.mangaList_author {
+  display: block;
+  block-size: 3em;
+  padding-top: 0.5em;
+}
+.mangaList_etat {
+  display: block;
+  block-size: 1.5em;
+  margin: 15px 0;
+  font-weight: bold;
+  text-align: center;
+}
+.mangaList_chapters {
+  margin: 1em 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.mangaList_titleChapter {
+  display: block;
+  block-size: 4.5em;
+  padding-block: 1em;
+}
+
+@media screen and (min-width: 1000px) {
+  .mangaList_container input[type="text"] {
+    width: 40%;
+  }
+  .mangaList_list {
+    grid-template-columns: repeat(8, 13em);
+  }
+}

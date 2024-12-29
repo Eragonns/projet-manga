@@ -127,3 +127,73 @@
   background-color: $shade_of_red;
   color: $white;
 }
+
+@media screen and (min-width: 1000px) {
+  .profil_title {
+    font-size: 2em;
+  }
+  .profil_img {
+    inline-size: 15em;
+    block-size: 15em;
+  }
+  .profil_form input[type="file"]::file-selector-button {
+    padding: 0.5em 0.5em;
+  }
+  #image.profil_file {
+    font-size: 1.3em;
+  }
+  .profil_info input {
+    font-size: 1em;
+  }
+  .profil_description {
+    width: 23%;
+    margin-inline: auto;
+    font-size: 1.5em;
+  }
+  .profil_description textarea {
+    font-size: 1em;
+    height: 5em;
+  }
+  .profil_input {
+    width: 23%;
+    margin-inline: auto;
+    margin-block-start: 2em;
+    font-size: 1.5em;
+  }
+  .profil_input input {
+    font-size: 1em;
+  }
+  .profil_dropdownMenu {
+    width: 23%;
+    margin-inline: auto;
+    font-size: 1.5em;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-block-start: 0.2em;
+  }
+  .profil_dropdown button {
+    font-size: 1em;
+  }
+  .profil_dropdownItem input[type="checkbox"] {
+    width: 0.7em;
+    height: 0.7em;
+  }
+  .profil_form_btn {
+    font-size: 1.5em;
+    margin-block-start: 2em;
+  }
+  .profil_input_changePassword {
+    width: 23%;
+    margin-inline: auto;
+    margin-block-start: 2em;
+    font-size: 1.5em;
+  }
+  .profil_input_changePassword input {
+    font-size: 1em;
+  }
+  .profil_changePassword_btn {
+    font-size: 1.5em;
+    margin-block-start: 2em;
+  }
+}

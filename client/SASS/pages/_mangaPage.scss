@@ -58,6 +58,10 @@
   background-color: #191c23;
   border-radius: 10px;
   margin-block: 1em;
+  cursor: pointer;
+}
+.mangaPage_liens:hover {
+  background-color: #2b2e36;
 }
 
 .mangaPage_lien {
@@ -67,4 +71,42 @@
 
 .mangaPage_lien:hover {
   color: $shade_of_red;
+}
+
+@media screen and (min-width: 1000px) {
+  .mangaPage_img {
+    width: 15%;
+    margin-inline: auto;
+  }
+  .mangaPage_title {
+    font-size: 3em;
+  }
+  .mangaPage_status {
+    font-size: 2em;
+  }
+  .mangaPage_genreItem {
+    font-size: 1.5em;
+  }
+  .mangaPage_text {
+    width: 50%;
+    margin-inline: auto;
+    font-size: 1.5em;
+    margin-block-start: 2em;
+  }
+  .mangaPage_toggleBtn {
+    font-size: 1.5em;
+    display: block;
+    margin-inline: auto;
+  }
+  .mangaPage_chapters {
+    width: 50%;
+    margin-inline: auto;
+  }
+  .mangaPage_titleChapters {
+    font-size: 2em;
+    margin-inline: auto;
+  }
+  .mangaPage_liens {
+    font-size: 1.5em;
+  }
 }

@@ -116,3 +116,37 @@
   background-color: $white;
   color: $black;
 }
+
+@media screen and (min-width: 768px) {
+  .home_mangaList {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .home_mangaList {
+    grid-template-columns: repeat(6, 17em);
+    justify-content: center;
+  }
+  .home_title {
+    font-size: 3em;
+  }
+  .home_searchInput {
+    width: 50%;
+    margin-block-start: 1em;
+    padding-block: 1em;
+  }
+  .home_mangaList_article {
+    inline-size: 15em;
+    block-size: 27em;
+  }
+  .home_mangaList_btn {
+    font-size: 1em;
+    inline-size: 63.5%;
+    padding-block: 1em;
+  }
+  .home_searchResults {
+    width: 51%;
+    margin-inline: auto;
+  }
+}

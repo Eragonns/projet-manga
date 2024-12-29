@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     <footer className="footer">
-      <p>
+      <p className="footer_text">
         &copy; 2024 ScanMangaVerse., tous droits réservés. Tous les comics sur
         ce site ne sont que des aperçus des comics originaux, il peut y avoir de
         nombreuses erreurs de langue, de noms de personnages et de scénarios.

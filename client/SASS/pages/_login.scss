@@ -86,3 +86,19 @@
   text-decoration: underline;
   color: $shade_of_red;
 }
+
+@media screen and (min-width: 1000px) {
+  .login_title {
+    font-size: 3em;
+  }
+  .login_form input {
+    font-size: 1.5em;
+  }
+  .login_btn {
+    font-size: 1.5em;
+  }
+  .login_registerLink {
+    font-size: 1.5em;
+    bottom: 10%;
+  }
+}

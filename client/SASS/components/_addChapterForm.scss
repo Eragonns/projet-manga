@@ -76,3 +76,9 @@
 .addChapter_file::file-selector-button:hover {
   background-color: $shade_of_red;
 }
+
+@media screen and (min-width: 1000px) {
+  .addChapter_formulaire {
+    max-width: 30%;
+  }
+}

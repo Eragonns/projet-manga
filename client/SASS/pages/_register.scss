@@ -5,7 +5,7 @@
 }
 
 .register_title {
-  color: $white;
+  color: $black;
   font-family: $font-title;
   font-size: 2em;
   position: absolute;
@@ -86,4 +86,20 @@
 .register_loginLink_link:hover {
   text-decoration: underline;
   color: $shade_of_red;
+}
+
+@media screen and (min-width: 1000px) {
+  .register_title {
+    font-size: 3em;
+  }
+  .register_form input {
+    font-size: 1.5em;
+  }
+  .register_btn {
+    font-size: 1.5em;
+  }
+  .register_loginLink {
+    font-size: 1.5em;
+    bottom: 10%;
+  }
 }

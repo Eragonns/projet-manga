@@ -1,51 +1,61 @@
-.admin_carousel {
-  background-color: $black;
-  color: $white;
-  padding: 1.5em;
-  height: 100%;
+.home_carousel_container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
 }
-.admin_carousel_title {
-  font-family: $font-primary;
-  font-size: 1.5em;
-  padding: 0.5em;
+.home_carousel {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
 }
 
-.home_carousel {
-  position: relative;
-  scroll-snap-type: x mandatory;
-}
 .home_carousel div {
-  width: 100%;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  min-width: 100%;
+  box-sizing: border-box;
 }
+
 .home_carousel img {
-  width: auto;
-  height: 100%;
-  aspect-ratio: 16 / 20;
-  scroll-snap-align: center;
+  width: 100%;
+  height: auto;
   cursor: pointer;
-  pointer-events: auto;
   filter: brightness(0.7);
+  transition: filter 0.3s ease;
 }
 
 .home_carousel img:hover {
   filter: brightness(1);
 }
-.carousel .slide {
-  text-align: left;
+.home_carousel_item {
+  position: relative;
 }
-
 .home_carouselTitle {
   position: absolute;
   bottom: 0;
   left: 0;
   font-family: $font-title;
   color: $white;
-  padding: 0.5em;
+  padding: 0.8em;
   font-size: 1.2em;
   width: 100%;
   box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+@media screen and (min-width: 1000px) {
+  .home_carousel {
+    width: 20%;
+    // flex: 0 0 30%;
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: calc(100% * (totalItems + 4));
+  }
+
+  .home_carousel img {
+    width: 100%;
+    height: auto;
+  }
+  .home_carouselTitle {
+    font-size: 1.8em;
+    color: $shade_of_red;
+  }
 }

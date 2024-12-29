@@ -104,3 +104,9 @@
   background-color: $shade_of_red;
   color: $white;
 }
+
+@media screen and (min-width: 1000px) {
+  .editManga_select {
+    width: 40%;
+  }
+}

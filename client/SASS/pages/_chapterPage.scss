@@ -75,3 +75,26 @@
   flex-flow: column nowrap;
   align-items: center;
 }
+
+@media screen and (min-width: 1000px) {
+  .chapterPage_title {
+    font-size: 2.5em;
+  }
+  .chapterPage_select {
+    font-size: 2em;
+    width: 30%;
+    padding-block: 0.3em;
+  }
+  .chapterPage_btn {
+    font-size: 1.5em;
+  }
+  .chapterPage_imagesContainer {
+    inline-size: 50%;
+    margin-inline: auto;
+  }
+  .chapterPage_btnToTop {
+    font-size: 1.5em;
+    margin-inline-end: 1em;
+    margin-block-end: 1em;
+  }
+}

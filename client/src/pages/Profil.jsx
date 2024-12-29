@@ -169,6 +169,7 @@ const UserProfile = () => {
             type="file"
             id="image"
             aria-label="image"
+            className="profil_file"
             onChange={handleImageChange}
           />
         </div>
@@ -218,7 +219,7 @@ const UserProfile = () => {
             />
           </div>
         </div>
-        <div>
+        <div className="profil_description">
           <label htmlFor="description">Description:</label>
           <textarea
             name="description"
@@ -241,7 +242,7 @@ const UserProfile = () => {
         </div>
         <div className="profil_input">
           <label htmlFor="dropdown">Genre Favoris:</label>
-          <div>
+          <div className="profil_dropdown">
             <button
               type="button"
               id="dropdown"
